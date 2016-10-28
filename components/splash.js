@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import firebase, { auth, database } from 'firebase';
-// import FirebaseApp from '../root';
 
 import Signup from './auth-signup';
 import UserList from './userlist';
 import MainContent from './content';
 import SignOutButton from './signout';
+import Countdown from './countdown';
 
 export default class Splash extends Component {
   constructor() {
@@ -36,9 +36,9 @@ export default class Splash extends Component {
     } = this.state;
 
     const users = [
-      'one',
-      'two',
-      'three',
+      'user1',
+      'user2',
+      'user3',
     ];
 
     return (
@@ -52,8 +52,9 @@ export default class Splash extends Component {
         </div>
         <div className={'splash-bottom'}>
           <img src={'../images/flat_elf.jpg'} style={{ borderRadius: '15px', margin: '10px' }} />
-             <UserList users={users} />
-          </div>
+          <Countdown />
+          <UserList users={users} />
+        </div>
           { !!currentUser && <SignOutButton /> }
       </div>
     );

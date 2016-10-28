@@ -20,6 +20,7 @@ body {
 .splash-bottom {
   display: flex;
   height: 200px;
+  width: 200px;
 }
 
 .signup-wrapper {
@@ -30,10 +31,9 @@ body {
 }
 
 .userlist-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
+  display: inline;
+  /*justify-content: center;*/
+  /*align-items: center;*/
   color: white;
 }
 
@@ -92,4 +92,12 @@ body {
 
 .auth-tabs-login {
 
+}
+
+.countdown-wrapper {
+  display: inline-block;
+}
+
+.countdown-text {
+  color: white;
 }
