@@ -22247,10 +22247,22 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash' },
-	        !currentUser && _react2.default.createElement(_authSignup2.default, null),
-	        !!currentUser && _react2.default.createElement(_content2.default, null),
-	        !!currentUser && _react2.default.createElement(_signout2.default, null),
-	        _react2.default.createElement(_userlist2.default, { users: users })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splash-top' },
+	          !currentUser && _react2.default.createElement(_authSignup2.default, null),
+	          !!currentUser && _react2.default.createElement(_content2.default, null),
+	          _react2.default.createElement('img', { src: '../images/santa_blue.jpg',
+	            style: { width: '200px', height: 'auto', borderRadius: '15px', margin: '10px' }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splash-bottom' },
+	          _react2.default.createElement('img', { src: '../images/flat_elf.jpg', style: { borderRadius: '15px', margin: '10px' } }),
+	          _react2.default.createElement(_userlist2.default, { users: users })
+	        ),
+	        !!currentUser && _react2.default.createElement(_signout2.default, null)
 	      );
 	    }
 	  }]);

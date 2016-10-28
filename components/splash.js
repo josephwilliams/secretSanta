@@ -43,10 +43,18 @@ export default class Splash extends Component {
 
     return (
       <div className={'splash'}>
-        { !currentUser && <Signup /> }
-        { !!currentUser && <MainContent /> }
-        { !!currentUser && <SignOutButton /> }
-        <UserList users={users} />
+        <div className={'splash-top'}>
+          { !currentUser && <Signup /> }
+          { !!currentUser && <MainContent /> }
+          <img src={'../images/santa_blue.jpg'}
+          style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px' }}
+          />
+        </div>
+        <div className={'splash-bottom'}>
+          <img src={'../images/flat_elf.jpg'} style={{ borderRadius: '15px', margin: '10px' }} />
+             <UserList users={users} />
+          </div>
+          { !!currentUser && <SignOutButton /> }
       </div>
     );
   }

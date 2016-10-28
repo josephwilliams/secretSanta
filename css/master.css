@@ -3,13 +3,23 @@ body {
 }
 
 .splash {
-  padding-top: 200px;
+  padding-top: 150px;
   margin: 0 auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.splash-top {
+  display: flex;
+  height: 200px;
+}
+
+.splash-bottom {
+  display: flex;
+  height: 200px;
 }
 
 .signup-wrapper {
@@ -19,12 +29,23 @@ body {
   flex-direction: column;
 }
 
+.userlist-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  color: white;
+}
+
 .input {
   height: 50px;
-  width: 200px;
-  border-radius: 3px;
+  width: 191px;
   border: 1px solid lightgrey;
   background: white;
+  margin-top: 10px;
+  padding: 5px 0px 0px 10px;
+  border-radius: 8px;
+  border: solid 1px #265665;
 }
 
 .textarea {
@@ -37,15 +58,16 @@ body {
 
 .auth-submit-button {
   height: 50px;
-  width: 200px;
-  border-radius: 3px;
-  border: 1px solid darkblue;
+  width: 202px;
+  border-radius: 8px;
+  border: 1px solid #8282bf;
   background: lightblue;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .auth-submit-button:hover {
-  background: blue;
+  background: #83a9cb;
 }
 
 .signout-button {
