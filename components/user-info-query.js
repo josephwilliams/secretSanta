@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 
-export default class Auth extends Component {
+export default class BasicInfoQuery extends Component {
   constructor() {
     super();
     this.state = {

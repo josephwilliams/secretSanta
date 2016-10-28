@@ -2,6 +2,17 @@
   - users include email, name, link to amazon wishlist
 
 - set up random draw (tied to firebase)
-- set up countdown?
+  - takes snapshot of /users (grabs all userIds in array)
+    - randomizes and takes pairs
+    - stores pairs
+    
+- set up countdown to Xmas with countdown.js
 
-- cool UI
+- create /users fields
+  - will be /users/#userId
+    - will contain:
+      - wishListUrl
+      - name
+      - customMessage
+      - pairedUserId
+      ( will be able to get pairUser's info from /users/#pairedUserId )
