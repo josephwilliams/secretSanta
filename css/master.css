@@ -1,0 +1,73 @@
+body {
+  background-color: #5885ad;
+}
+
+.splash {
+  padding-top: 200px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input {
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+  background: white;
+}
+
+.textarea {
+  height: 100px;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+  background: white;
+}
+
+.auth-submit-button {
+  height: 50px;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid darkblue;
+  background: lightblue;
+  cursor: pointer;
+}
+
+.auth-submit-button:hover {
+  background: blue;
+}
+
+.signout-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100px;
+  border-radius: 3px;
+  border: 1px solid darkgreen;
+  background: lightgreen;
+  cursor: pointer;
+}
+
+.auth-tabs-wrapper {
+
+}
+
+.auth-tabs-signup {
+
+}
+
+.auth-tabs-login {
+
+}

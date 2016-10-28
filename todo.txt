@@ -1,0 +1,7 @@
+- set up auth
+  - users include email, name, link to amazon wishlist
+
+- set up random draw (tied to firebase)
+- set up countdown?
+
+- cool UI
