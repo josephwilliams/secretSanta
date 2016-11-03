@@ -53,7 +53,7 @@ export default class Auth extends Component {
         </div>
         <input
           type={'submit'}
-          value={'submit'}
+          value={'Log in'}
           className={'auth-submit-button'}
           onSubmit={this._onSubmit}
         />

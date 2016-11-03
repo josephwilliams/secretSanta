@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase, { auth, database } from 'firebase';
 
-import AuthContainer from './auth-container';
+import Signup from './auth-signup';
 import UserList from './userlist';
 import MainContent from './content';
 import SignOutButton from './signout';
@@ -44,16 +44,16 @@ export default class Splash extends Component {
     return (
       <div className={'splash'}>
         <div className={'splash-top'}>
-          { !currentUser && <AuthContainer /> }
+          { !currentUser && <Signup /> }
           { !!currentUser && <MainContent /> }
-          <div style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' }} />
+          <img src={'../images/santa_blue.jpg'}
+          style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px' }}
+          />
         </div>
         <div className={'splash-bottom'}>
-          <div style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' }} />
-          <div className={'splash-quadrant'}>
-            <Countdown />
-            <UserList users={users} />
-          </div>
+          <img src={'../images/flat_elf.jpg'} style={{ borderRadius: '15px', margin: '10px' }} />
+          <Countdown />
+          <UserList users={users} />
         </div>
           { !!currentUser && <SignOutButton /> }
       </div>

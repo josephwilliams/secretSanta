@@ -20,14 +20,34 @@ export default class Auth extends Component {
     return event => this.setState({ [field]: event.target.value });
   }
 
+  checkCurrentUser() {
+    let that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('!! currentUser', user);
+        that.setState({ currentUser: user });
+      } else {
+        // No user is signed in.
+        console.log('!!! no currentUser');
+      }
+    });
+  }
+
   _onSubmit() {
     const { email, password } = this.state;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      console.log('submit clicked!');
+      this.checkCurrentUser();
+    })
+    .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log('auth error!', errorCode, errorMessage);
     });
+
+    this.forceUpdate();
   }
 
   render() {
@@ -52,9 +72,9 @@ export default class Auth extends Component {
         </div>
         <input
           type={'submit'}
-          value={'submit'}
+          value={'Sign up'}
           className={'auth-submit-button'}
-          onSubmit={this._onSubmit.bind(this)}
+          onSubmit={()=>this._onSubmit}
         />
       </div>
     );

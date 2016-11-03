@@ -14,13 +14,21 @@ body {
 
 .splash-top {
   display: flex;
+  justify-content: center;
   height: 200px;
 }
 
 .splash-bottom {
   display: flex;
+  justify-content: center;
   height: 200px;
+}
+
+.splash-quadrant {
+  display: flex;
+  flex-direction: column;
   width: 200px;
+  height: 200px;
 }
 
 .signup-wrapper {
@@ -83,15 +91,22 @@ body {
 }
 
 .auth-tabs-wrapper {
-
+  display: flex;
+  margin: auto 0;
 }
 
-.auth-tabs-signup {
-
+.auth-tab-active {
+  cursor: default;
+  width: 50px;
+  height: 20px;
+  background: #83a9cb;
 }
 
-.auth-tabs-login {
-
+.auth-tab-inactive {
+  cursor: pointer;
+  width: 50px;
+  height: 20px;
+  background: lightblue;
 }
 
 .countdown-wrapper {

@@ -9,29 +9,44 @@ export default class AuthContainer extends Component {
   constructor(){
     super();
     this.state = {
-      selectedTab: 'signup';
-    }
+      selectedTab: 'signup',
+    };
+  }
+
+  toggleTabs() {
+    const newTab = this.state.selectedTab === 'signup' ? 'login' : 'signup';
+    this.setState({ selectedTab: newTab });
   }
 
   renderTabs() {
-    <div className={'auth-tabs-wrapper'}>
-      <div className={'auth-tab-signup'}>
-        {'signup'}
+    const { selectedTab } = this.state;
+    const authTabs = ['signup', 'login'];
+
+    return (
+      <div className={'auth-tabs-wrapper'}>
+        { authTabs.map((tabName, index) => {
+          return ( tabName === selectedTab ? (
+            <div className={'auth-tab-active'} key={index}>
+              {tabName}
+            </div>
+          ) :
+         (
+          <div className={'auth-tab-inactive'} key={index} onClick={()=>this.toggleTabs()}>
+            {tabName}
+          </div>
+        ))
+        })}
       </div>
-      <div className={'auth-tab-login'}>
-        {'login'}
-      </div>
-    </div>
+    );
   }
 
   render() {
-    { selectedTab } = this.state;
-    isSignUpTab = selectedTab === 'signup';
-    isLogInTab = selectedTab === 'login';
+    const { selectedTab } = this.state;
+    const isSignUpTab = selectedTab === 'signup';
+    const isLogInTab = selectedTab === 'login';
 
     return (
       <div className={'auth-container'}>
-        <img src={'../images/santa_blue.jpg'} style={{ borderRadius: '15px' }} />
         { this.renderTabs() }
         { isSignUpTab && <AuthSignUp /> }
         { isLogInTab && <AuthLogIn /> }

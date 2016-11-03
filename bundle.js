@@ -22182,9 +22182,9 @@
 	
 	var _firebase2 = _interopRequireDefault(_firebase);
 	
-	var _authSignup = __webpack_require__(179);
+	var _authContainer = __webpack_require__(179);
 	
-	var _authSignup2 = _interopRequireDefault(_authSignup);
+	var _authContainer2 = _interopRequireDefault(_authContainer);
 	
 	var _userlist = __webpack_require__(180);
 	
@@ -22253,18 +22253,20 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'splash-top' },
-	          !currentUser && _react2.default.createElement(_authSignup2.default, null),
+	          !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	          !!currentUser && _react2.default.createElement(_content2.default, null),
-	          _react2.default.createElement('img', { src: '../images/santa_blue.jpg',
-	            style: { width: '200px', height: 'auto', borderRadius: '15px', margin: '10px' }
-	          })
+	          _react2.default.createElement('div', { style: { width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' } })
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'splash-bottom' },
-	          _react2.default.createElement('img', { src: '../images/flat_elf.jpg', style: { borderRadius: '15px', margin: '10px' } }),
-	          _react2.default.createElement(_countdown2.default, null),
-	          _react2.default.createElement(_userlist2.default, { users: users })
+	          _react2.default.createElement('div', { style: { width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' } }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splash-quadrant' },
+	            _react2.default.createElement(_countdown2.default, null),
+	            _react2.default.createElement(_userlist2.default, { users: users })
+	          )
 	        ),
 	        !!currentUser && _react2.default.createElement(_signout2.default, null)
 	      );
@@ -22292,15 +22294,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _firebase = __webpack_require__(172);
+	var _classnames = __webpack_require__(185);
 	
-	var firebase = _interopRequireWildcard(_firebase);
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _authSignup = __webpack_require__(186);
+	
+	var _authSignup2 = _interopRequireDefault(_authSignup);
+	
+	var _authLogin = __webpack_require__(187);
+	
+	var _authLogin2 = _interopRequireDefault(_authLogin);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -22308,90 +22314,75 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// import FirebaseApp from '../root';
+	var AuthContainer = function (_Component) {
+	  _inherits(AuthContainer, _Component);
 	
-	// var firebase = require('firebase/app');
-	// require('firebase/auth');
-	// require('firebase/database');
+	  function AuthContainer() {
+	    _classCallCheck(this, AuthContainer);
 	
-	var Auth = function (_Component) {
-	  _inherits(Auth, _Component);
-	
-	  function Auth() {
-	    _classCallCheck(this, Auth);
-	
-	    var _this = _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this));
+	    var _this = _possibleConstructorReturn(this, (AuthContainer.__proto__ || Object.getPrototypeOf(AuthContainer)).call(this));
 	
 	    _this.state = {
-	      email: '',
-	      password: '',
-	      errorMessage: ''
+	      selectedTab: 'signup'
 	    };
 	    return _this;
 	  }
 	
-	  _createClass(Auth, [{
-	    key: '_onChange',
-	    value: function _onChange(field) {
-	      var _this2 = this;
-	
-	      return function (event) {
-	        return _this2.setState(_defineProperty({}, field, event.target.value));
-	      };
+	  _createClass(AuthContainer, [{
+	    key: 'toggleTabs',
+	    value: function toggleTabs() {
+	      var newTab = this.state.selectedTab === 'signup' ? 'login' : 'signup';
+	      this.setState({ selectedTab: newTab });
 	    }
 	  }, {
-	    key: '_onSubmit',
-	    value: function _onSubmit() {
-	      var _state = this.state;
-	      var email = _state.email;
-	      var password = _state.password;
+	    key: 'renderTabs',
+	    value: function renderTabs() {
+	      var _this2 = this;
 	
+	      var selectedTab = this.state.selectedTab;
 	
-	      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-	        var errorCode = error.code;
-	        var errorMessage = error.message;
-	        console.log('auth error!', errorCode, errorMessage);
-	      });
+	      var authTabs = ['signup', 'login'];
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'auth-tabs-wrapper' },
+	        authTabs.map(function (tabName, index) {
+	          return tabName === selectedTab ? _react2.default.createElement(
+	            'div',
+	            { className: 'auth-tab-active', key: index },
+	            tabName
+	          ) : _react2.default.createElement(
+	            'div',
+	            { className: 'auth-tab-inactive', key: index, onClick: function onClick() {
+	                return _this2.toggleTabs();
+	              } },
+	            tabName
+	          );
+	        })
+	      );
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var selectedTab = this.state.selectedTab;
+	
+	      var isSignUpTab = selectedTab === 'signup';
+	      var isLogInTab = selectedTab === 'login';
+	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'signup-wrapper' },
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          placeholder: 'your email address',
-	          onChange: this._onChange('email'),
-	          value: this.state.email,
-	          className: 'input'
-	        }),
-	        _react2.default.createElement('input', {
-	          type: 'password',
-	          placeholder: 'your password.  remember it!',
-	          onChange: this._onChange('password'),
-	          value: this.state.password,
-	          className: 'input'
-	        }),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'auth-error-message' },
-	          this.state.errorMessage
-	        ),
-	        _react2.default.createElement('input', {
-	          type: 'submit',
-	          value: 'submit',
-	          className: 'auth-submit-button',
-	          onSubmit: this._onSubmit.bind(this)
-	        })
+	        { className: 'auth-container' },
+	        this.renderTabs(),
+	        isSignUpTab && _react2.default.createElement(_authSignup2.default, null),
+	        isLogInTab && _react2.default.createElement(_authLogin2.default, null)
 	      );
 	    }
 	  }]);
 	
-	  return Auth;
+	  return AuthContainer;
 	}(_react.Component);
 	
-	exports.default = Auth;
+	exports.default = AuthContainer;
 
 /***/ },
 /* 180 */
@@ -23980,6 +23971,308 @@
 	
 	})(module);
 
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _firebase = __webpack_require__(172);
+	
+	var firebase = _interopRequireWildcard(_firebase);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// import FirebaseApp from '../root';
+	
+	// var firebase = require('firebase/app');
+	// require('firebase/auth');
+	// require('firebase/database');
+	
+	var Auth = function (_Component) {
+	  _inherits(Auth, _Component);
+	
+	  function Auth() {
+	    _classCallCheck(this, Auth);
+	
+	    var _this = _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this));
+	
+	    _this.state = {
+	      email: '',
+	      password: '',
+	      errorMessage: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Auth, [{
+	    key: '_onChange',
+	    value: function _onChange(field) {
+	      var _this2 = this;
+	
+	      return function (event) {
+	        return _this2.setState(_defineProperty({}, field, event.target.value));
+	      };
+	    }
+	  }, {
+	    key: 'checkCurrentUser',
+	    value: function checkCurrentUser() {
+	      var that = this;
+	      firebase.auth().onAuthStateChanged(function (user) {
+	        if (user) {
+	          console.log('!! currentUser', user);
+	          that.setState({ currentUser: user });
+	        } else {
+	          // No user is signed in.
+	          console.log('!!! no currentUser');
+	        }
+	      });
+	    }
+	  }, {
+	    key: '_onSubmit',
+	    value: function _onSubmit() {
+	      var _this3 = this;
+	
+	      var _state = this.state;
+	      var email = _state.email;
+	      var password = _state.password;
+	
+	
+	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+	        console.log('submit clicked!');
+	        _this3.checkCurrentUser();
+	      }).catch(function (error) {
+	        var errorCode = error.code;
+	        var errorMessage = error.message;
+	        console.log('auth error!', errorCode, errorMessage);
+	      });
+	
+	      this.forceUpdate();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'signup-wrapper' },
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          placeholder: 'your email address',
+	          onChange: this._onChange('email'),
+	          value: this.state.email,
+	          className: 'input'
+	        }),
+	        _react2.default.createElement('input', {
+	          type: 'password',
+	          placeholder: 'your password.  remember it!',
+	          onChange: this._onChange('password'),
+	          value: this.state.password,
+	          className: 'input'
+	        }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'auth-error-message' },
+	          this.state.errorMessage
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'submit',
+	          value: 'Sign up',
+	          className: 'auth-submit-button',
+	          onSubmit: function onSubmit() {
+	            return _this4._onSubmit;
+	          }
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return Auth;
+	}(_react.Component);
+	
+	exports.default = Auth;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// import * as firebase from 'firebase';
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
+	var Auth = function (_Component) {
+	  _inherits(Auth, _Component);
+	
+	  function Auth() {
+	    _classCallCheck(this, Auth);
+	
+	    var _this = _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).call(this));
+	
+	    _this.state = {
+	      email: '',
+	      password: '',
+	      errorMessage: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Auth, [{
+	    key: '_onChange',
+	    value: function _onChange(field) {
+	      var _this2 = this;
+	
+	      (function () {
+	        _this2.setState(_defineProperty({}, field, event.target.value));
+	      });
+	    }
+	  }, {
+	    key: '_onSubmit',
+	    value: function _onSubmit() {
+	      firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+	        var errorCode = error.code;
+	        var errorMessage = error.message;
+	        console.log('auth error!', errorCode, errorMessage);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'signup-wrapper' },
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          placeholder: 'your email address',
+	          onChange: this._onChange('email'),
+	          value: this.state.email,
+	          className: 'input'
+	        }),
+	        _react2.default.createElement('input', {
+	          type: 'password',
+	          placeholder: 'your password.  remember it!',
+	          onChange: this._onChange('password'),
+	          value: this.state.password,
+	          className: 'input'
+	        }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'auth-error-message' },
+	          this.state.errorMessage
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'submit',
+	          value: 'Log in',
+	          className: 'auth-submit-button',
+	          onSubmit: this._onSubmit
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return Auth;
+	}(_react.Component);
+	
+	exports.default = Auth;
 
 /***/ }
 /******/ ]);
