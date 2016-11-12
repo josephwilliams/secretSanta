@@ -27,6 +27,8 @@ export default class Content extends Component {
   render() {
     const { userObject } = this.state;
 
+    console.log('userObject from content', userObject);
+
     const userId = null;
     const hasCompletedSignup = false;
     if ( userObject ) {
@@ -35,9 +37,11 @@ export default class Content extends Component {
     }
 
     return (
-      <div className={'content-wrapper'}>
-        { !hasCompletedSignup && <UserInfoQuery userId={userId}/> }
-        {'content!'}
+      <div className={'splash-row'}>
+        <div className={'content-wrapper'}>
+          { !hasCompletedSignup && <UserInfoQuery userId={userId}/> }
+          { hasCompletedSignup && 'content!'}
+        </div>
       </div>
     );
   }

@@ -22251,16 +22251,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'splash-row' },
-	          _react2.default.createElement('img', { src: '../images/flat_elf.jpg', className: 'splash-image' }),
-	          !currentUser && _react2.default.createElement(_authContainer2.default, null),
-	          !!currentUser && _react2.default.createElement(_content2.default, null),
-	          !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
-	        ),
+	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
+	        !!currentUser && _react2.default.createElement(_content2.default, null),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
-	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '50px 10px' } })
+	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '50px 10px' } }),
+	        !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
 	      );
 	    }
 	  }]);
@@ -22363,10 +22358,15 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'auth-container' },
-	        this.renderTabs(),
-	        isSignUpTab && _react2.default.createElement(_authSignup2.default, null),
-	        isLogInTab && _react2.default.createElement(_authLogin2.default, null)
+	        { className: 'splash-row' },
+	        _react2.default.createElement('img', { src: '../images/flat_elf.jpg', className: 'splash-image' }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'auth-container' },
+	          this.renderTabs(),
+	          isSignUpTab && _react2.default.createElement(_authSignup2.default, null),
+	          isLogInTab && _react2.default.createElement(_authLogin2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -22812,6 +22812,8 @@
 	      var userObject = this.state.userObject;
 	
 	
+	      console.log('userObject from content', userObject);
+	
 	      var userId = null;
 	      var hasCompletedSignup = false;
 	      if (userObject) {
@@ -22821,9 +22823,13 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'content-wrapper' },
-	        !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, { userId: userId }),
-	        'content!'
+	        { className: 'splash-row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content-wrapper' },
+	          !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, { userId: userId }),
+	          hasCompletedSignup && 'content!'
+	        )
 	      );
 	    }
 	  }]);
@@ -24358,9 +24364,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _firebase = __webpack_require__(172);
+	var _queryText = __webpack_require__(190);
 	
-	var _firebase2 = _interopRequireDefault(_firebase);
+	var _queryText2 = _interopRequireDefault(_queryText);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24371,6 +24377,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
 	
 	var BasicInfoQuery = function (_Component) {
 	  _inherits(BasicInfoQuery, _Component);
@@ -24414,7 +24424,7 @@
 	      var userId = this.props.userId;
 	
 	
-	      _firebase2.default.database().ref('users/' + userId).set({
+	      firebase.database().ref('users/' + userId).set({
 	        name: name,
 	        wishListUrl: wishListUrl,
 	        customMessage: customMessage
@@ -24425,38 +24435,54 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'query-wrapper' },
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          placeholder: 'your first name',
-	          onChange: this._onChange('name'),
-	          className: 'input'
-	        }),
-	        _react2.default.createElement('input', {
-	          type: 'text',
-	          placeholder: 'your Amazon wishlist URL',
-	          onChange: this._onChange('wishListUrl'),
-	          className: 'input'
-	        }),
-	        _react2.default.createElement('textarea', {
-	          type: 'text',
-	          placeholder: 'anything you want to add? :)',
-	          onChange: this._onChange('customMessage'),
-	          className: 'textarea'
-	        }),
+	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'auth-error-message' },
-	          this.state.errorMessage
+	          { className: 'splash-row' },
+	          _react2.default.createElement('img', {
+	            src: '../images/santa_blue.jpg',
+	            className: 'splash-image',
+	            style: { height: '162px', width: '180px' }
+	          }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'query-wrapper' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'your first name',
+	              onChange: this._onChange('name'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'your Amazon wishlist URL',
+	              onChange: this._onChange('wishListUrl'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('textarea', {
+	              type: 'text',
+	              placeholder: 'anything you want to add? :)',
+	              onChange: this._onChange('customMessage'),
+	              className: 'textarea'
+	            }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'auth-error-message' },
+	              this.state.errorMessage
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                className: 'auth-submit-button',
+	                onClick: this._onSubmit.bind(this)
+	              },
+	              'submit'
+	            )
+	          )
 	        ),
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: 'auth-submit-button',
-	            onClick: this._onSubmit.bind(this)
-	          },
-	          'submit'
-	        )
+	        _react2.default.createElement(_queryText2.default, null)
 	      );
 	    }
 	  }]);
@@ -24465,6 +24491,46 @@
 	}(_react.Component);
 	
 	exports.default = BasicInfoQuery;
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var QueryText = function QueryText() {
+	
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'splash-row-text' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'text-wrapper', style: { paddingLeft: '50px' } },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'almost done!'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'Fill in the rest of this for the person that draws your name.'
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = QueryText;
 
 /***/ }
 /******/ ]);

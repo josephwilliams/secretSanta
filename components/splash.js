@@ -54,14 +54,11 @@ export default class Splash extends Component {
 
     return (
       <div className={'splash'}>
-        <div className={'splash-row'}>
-          <img src={'../images/flat_elf.jpg'} className={'splash-image'} />
-          { !currentUser && <AuthContainer /> }
-          { !!currentUser && <MainContent /> }
-          { !!currentUser && <SignOutButton signOut={this._signOut.bind(this)} /> }
-        </div>
+        { !currentUser && <AuthContainer /> }
+        { !!currentUser && <MainContent /> }
         { !currentUser &&  <WelcomeText /> }
           <img src={'../images/christmas_village.png'} style={{ borderRadius: '15px', margin: '50px 10px' }} />
+          { !!currentUser && <SignOutButton signOut={this._signOut.bind(this)} /> }
       </div>
     );
   }

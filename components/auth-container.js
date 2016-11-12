@@ -46,11 +46,14 @@ export default class AuthContainer extends Component {
     const isLogInTab = selectedTab === 'login';
 
     return (
-      <div className={'auth-container'}>
-        { this.renderTabs() }
-        { isSignUpTab && <AuthSignUp /> }
-        { isLogInTab && <AuthLogIn /> }
+      <div className={'splash-row'}>
+        <img src={'../images/flat_elf.jpg'} className={'splash-image'} />
+        <div className={'auth-container'}>
+          { this.renderTabs() }
+          { isSignUpTab && <AuthSignUp /> }
+          { isLogInTab && <AuthLogIn /> }
+        </div>
       </div>
-    )
+    );
   }
 }

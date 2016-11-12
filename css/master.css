@@ -4,7 +4,7 @@ body {
 }
 
 .splash {
-  padding-top: 150px;
+  padding-top: 200px;
   margin: 0 auto;
 
   display: flex;
@@ -23,6 +23,7 @@ body {
 .splash-row {
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
   height: 200px;
 }
 
@@ -139,7 +140,7 @@ input:-ms-input-placeholder {
   margin-top: 10px;
   padding: 5px 5px 5px 10px;
   border-radius: 8px;
-  border: 1px solid #d07575;
+  border: 1px solid #ef4754;
   color: white;
   font-size: 14px;
 }
