@@ -57,7 +57,7 @@ export default class Splash extends Component {
         { !currentUser && <AuthContainer /> }
         { !!currentUser && <MainContent /> }
         { !currentUser &&  <WelcomeText /> }
-          <img src={'../images/christmas_village.png'} style={{ borderRadius: '15px', margin: '50px 10px' }} />
+          <img src={'../images/christmas_village.png'} style={{ borderRadius: '15px', margin: '25px 10px' }} />
           { !!currentUser && <SignOutButton signOut={this._signOut.bind(this)} /> }
       </div>
     );

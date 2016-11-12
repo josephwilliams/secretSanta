@@ -22,6 +22,13 @@ export default class Content extends Component {
       console.log('userObject!', userObject);
       that.setState({ userObject: userObject });
     });
+
+    // NOTE test case
+    let userObjectRef2 = firebase.database().ref('users/');
+    userObjectRef2.on('value', function(snapshot) {
+      let userObject = snapshot.val();
+      console.log('users!', userObject);
+    });
   }
 
   render() {

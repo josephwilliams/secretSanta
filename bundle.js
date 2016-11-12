@@ -22254,7 +22254,7 @@
 	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	        !!currentUser && _react2.default.createElement(_content2.default, null),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
-	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '50px 10px' } }),
+	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '25px 10px' } }),
 	        !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
 	      );
 	    }
@@ -22474,7 +22474,8 @@
 	    _this.state = {
 	      email: '',
 	      password: '',
-	      errorMessage: ''
+	      errorMessage: '',
+	      currentUser: {}
 	    };
 	    return _this;
 	  }
@@ -22496,14 +22497,24 @@
 	        if (user) {
 	          console.log('!! currentUser', user);
 	
-	          var userId = user.uid;
-	          that._createUserObject(userId);
+	          var _userId = user.uid;
+	          that._createUserObject(_userId);
 	          that.setState({ currentUser: user });
 	        } else {
 	          // No user is signed in.
 	          console.log('!!! no currentUser');
 	        }
 	      });
+	
+	      var _state = this.state,
+	          email = _state.email,
+	          currentUser = _state.currentUser;
+	
+	      var userId = currentUser.uid;
+	
+	      console.log('email, currentUser in auth-signup', email, currentUser);
+	
+	      this._createUserObject(userId, email);
 	    }
 	  }, {
 	    key: '_createUserObject',
@@ -22519,9 +22530,9 @@
 	    value: function _onSubmit() {
 	      var _this3 = this;
 	
-	      var _state = this.state,
-	          email = _state.email,
-	          password = _state.password;
+	      var _state2 = this.state,
+	          email = _state2.email,
+	          password = _state2.password;
 	
 	
 	      console.log('begun');
@@ -22804,6 +22815,13 @@
 	        var userObject = snapshot.val();
 	        console.log('userObject!', userObject);
 	        that.setState({ userObject: userObject });
+	      });
+	
+	      // NOTE test case
+	      var userObjectRef2 = firebase.database().ref('users/');
+	      userObjectRef2.on('value', function (snapshot) {
+	        var userObject = snapshot.val();
+	        console.log('users!', userObject);
 	      });
 	    }
 	  }, {

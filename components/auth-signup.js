@@ -13,6 +13,7 @@ export default class Auth extends Component {
       email: '',
       password: '',
       errorMessage: '',
+      currentUser: {},
     }
   }
 
@@ -25,7 +26,7 @@ export default class Auth extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log('!! currentUser', user);
-        
+
         const userId = user.uid;
         that._createUserObject(userId);
         that.setState({ currentUser: user });
@@ -34,6 +35,13 @@ export default class Auth extends Component {
         console.log('!!! no currentUser');
       }
     });
+
+    const { email, currentUser } = this.state;
+    const userId = currentUser.uid;
+
+    console.log('email, currentUser in auth-signup', email, currentUser);
+
+    this._createUserObject(userId, email);
   }
 
   _createUserObject(userId, email) {
