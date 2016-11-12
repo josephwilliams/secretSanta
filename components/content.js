@@ -12,6 +12,7 @@ export default class Content extends Component {
     super();
     this.state = {
       userObject: {},
+      userHasCompletedSignup: false,
     };
   }
 
@@ -24,6 +25,8 @@ export default class Content extends Component {
       let userObject = snapshot.val();
       console.log('users!', userObject);
     });
+
+    this.checkHasUserCompletedSignup();
   }
 
   _setUserObject(userId) {
@@ -34,6 +37,20 @@ export default class Content extends Component {
       console.log('userObject!', userObject);
       that.setState({ userObject: userObject });
     });
+  }
+
+  checkHasUserCompletedSignup() {
+    let user = firebase.auth().currentUser;
+
+    let that = this;
+    if ( user ) {
+      let userId = user.uid;
+      let userObjectRef = firebase.database().ref('users/' + userId);
+      userObjectRef.on('value', function(snapshot) {
+        let userObject = snapshot.val();
+        that.setState({ userObject: userObject });
+      });
+    }
   }
 
   render() {

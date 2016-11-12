@@ -22230,17 +22230,6 @@
 	      });
 	    }
 	  }, {
-	    key: '_signOut',
-	    value: function _signOut() {
-	      var that = this;
-	      _firebase2.default.auth().signOut().then(function () {
-	        that.setState({ currentUser: null });
-	      }, function (error) {
-	        // An error happened.
-	        console.log('!!! signout error', error);
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var currentUser = this.state.currentUser;
@@ -22254,8 +22243,7 @@
 	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	        !!currentUser && _react2.default.createElement(_content2.default, null),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
-	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } }),
-	        !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
+	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } })
 	      );
 	    }
 	  }]);
@@ -22809,7 +22797,8 @@
 	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
 	
 	    _this.state = {
-	      userObject: {}
+	      userObject: {},
+	      userHasCompletedSignup: false
 	    };
 	    return _this;
 	  }
@@ -22825,6 +22814,8 @@
 	        var userObject = snapshot.val();
 	        console.log('users!', userObject);
 	      });
+	
+	      this.checkHasUserCompletedSignup();
 	    }
 	  }, {
 	    key: '_setUserObject',
@@ -22836,6 +22827,21 @@
 	        console.log('userObject!', userObject);
 	        that.setState({ userObject: userObject });
 	      });
+	    }
+	  }, {
+	    key: 'checkHasUserCompletedSignup',
+	    value: function checkHasUserCompletedSignup() {
+	      var user = firebase.auth().currentUser;
+	
+	      var that = this;
+	      if (user) {
+	        var userId = user.uid;
+	        var userObjectRef = firebase.database().ref('users/' + userId);
+	        userObjectRef.on('value', function (snapshot) {
+	          var userObject = snapshot.val();
+	          that.setState({ userObject: userObject });
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -22962,7 +22968,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'splash-row' },
+	          { className: 'splash-row', style: { marginTop: '50px' } },
 	          _react2.default.createElement('img', {
 	            src: '../images/santa_blue.jpg',
 	            className: 'splash-image',
@@ -24586,6 +24592,10 @@
 	
 	var _contentText2 = _interopRequireDefault(_contentText);
 	
+	var _signoutButton = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./signout-button\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _signoutButton2 = _interopRequireDefault(_signoutButton);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24611,12 +24621,24 @@
 	  }
 	
 	  _createClass(CoreContent, [{
+	    key: '_signOut',
+	    value: function _signOut() {
+	      var that = this;
+	      firebase.auth().signOut().then(function () {
+	        that.setState({ currentUser: null });
+	      }, function (error) {
+	        // An error happened.
+	        console.log('!!! signout error', error);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash-row' },
-	        _react2.default.createElement(_contentText2.default, null)
+	        _react2.default.createElement(_contentText2.default, null),
+	        _react2.default.createElement(_signoutButton2.default, { signOut: this._signOut.bind(this) })
 	      );
 	    }
 	  }]);
