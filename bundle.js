@@ -22854,7 +22854,7 @@
 	        console.log('!!! signout error', error);
 	      });
 	
-	      this.forceUpdate();
+	      // this.forceUpdate();
 	    }
 	  }, {
 	    key: 'render',
@@ -22875,7 +22875,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content-wrapper' },
-	          !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
+	          userObjectGotten && !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
 	          isSignupCompleted && _react2.default.createElement(_coreContent2.default, { signOut: this._signOut.bind(this), currentUser: userObject })
 	        )
 	      );

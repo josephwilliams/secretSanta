@@ -62,7 +62,7 @@ export default class Content extends Component {
       console.log('!!! signout error', error);
     });
 
-    this.forceUpdate();
+    // this.forceUpdate();
   }
 
   render() {
@@ -78,7 +78,7 @@ export default class Content extends Component {
     return (
       <div className={'splash-row'}>
         <div className={'content-wrapper'}>
-          { !isSignupCompleted && <UserInfoQuery setUserObject={this._setUserObject.bind(this)}/> }
+          { userObjectGotten && !isSignupCompleted && <UserInfoQuery setUserObject={this._setUserObject.bind(this)}/> }
           { isSignupCompleted && <CoreContent signOut={this._signOut.bind(this)} currentUser={userObject} /> }
         </div>
       </div>
