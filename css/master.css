@@ -73,25 +73,52 @@ body {
 }
 
 .input {
-  height: 37px;
-  width: 191px;
+  height: 35px;
+  width: 182px;
   background: transparent;
   margin-top: 10px;
-  padding: 5px 0px 0px 10px;
+  padding: 5px 5px 5px 10px;
   border-radius: 8px;
-  border-bottom: 4px solid #ffffff;
+  border: 1px solid #d07575;
   color: white;
+  font-size: 14px;
 }
 
 input {
-  height: 37px;
-  width: 191px;
-  background: transparent;
-  margin-top: 10px;
-  padding: 5px 0px 0px 10px;
-  border-radius: 8px;
-  border-bottom: 4px solid #ffffff;
-  color: white;
+  border: none;
+}
+
+input, input:hover, input:focus {
+  -webkit-appearance:none;
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+   color: white;
+   font-size: 13px;
+   font-weight: 300px;
+   padding: -2px 10px;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+   color: white;
+   font-size: 13px;
+   font-weight: 300px;
+   padding: -2px 10px;
+}
+
+input::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+   font-size: 13px;
+   font-weight: 300px;
+   padding: 10px;
+}
+
+input:-ms-input-placeholder {
+   color: white;
+   font-size: 13px;
+   font-weight: 300px;
+   padding: -2px 10px;
 }
 
 .textarea {
@@ -106,14 +133,19 @@ input {
   height: 40px;
   width: 202px;
   border-radius: 8px;
-  border: 1px solid #8282bf;
-  background: lightblue;
+  background: #943540;
+  color: #e8e8e8;
+  font-size: 13px;
   cursor: pointer;
   margin-top: 10px;
 }
 
 .auth-submit-button:hover {
-  background: #83a9cb;
+  background: #7b2d36;
+}
+
+.auth-submit-button:active {
+  background: #ad4753;
 }
 
 .signout-button {
@@ -133,6 +165,8 @@ input {
   margin: auto 0;
   position: relative;
   left: 10px;
+  color: white;
+  font-weight: 300;
 }
 
 .auth-tab-active {
@@ -145,6 +179,7 @@ input {
   border-radius: 6px 6px 0 0;
   color: white;
   cursor: default;
+  margin: 0 3px;
 }
 
 .auth-tab-inactive {
@@ -157,6 +192,7 @@ input {
   border-radius: 6px 6px 0 0;
   color: white;
   cursor: pointer;
+  margin: 0 3px;
 }
 
 .countdown-wrapper {

@@ -22527,14 +22527,14 @@
 	        { className: 'signup-wrapper' },
 	        _react2.default.createElement('input', {
 	          type: 'text',
-	          placeholder: 'your email address',
+	          placeholder: 'email',
 	          onChange: this._onChange('email'),
 	          value: this.state.email,
 	          className: 'input'
 	        }),
 	        _react2.default.createElement('input', {
 	          type: 'password',
-	          placeholder: 'your password.  remember it!',
+	          placeholder: 'password',
 	          onChange: this._onChange('password'),
 	          value: this.state.password,
 	          className: 'input'
@@ -22635,14 +22635,14 @@
 	        { className: 'signup-wrapper' },
 	        _react2.default.createElement('input', {
 	          type: 'text',
-	          placeholder: 'your email address',
+	          placeholder: 'email',
 	          onChange: this._onChange('email'),
 	          value: this.state.email,
 	          className: 'input'
 	        }),
 	        _react2.default.createElement('input', {
 	          type: 'password',
-	          placeholder: 'your password.  remember it!',
+	          placeholder: 'password',
 	          onChange: this._onChange('password'),
 	          value: this.state.password,
 	          className: 'input'
