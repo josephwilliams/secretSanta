@@ -23168,21 +23168,16 @@
 	    'div',
 	    { className: 'countdown-wrapper' },
 	    _react2.default.createElement('img', {
-	      src: '../images/cool_bubble.jpg',
-	      className: 'speech-bubble-image',
-	      style: { width: '100px', height: '100px' }
+	      src: '../images/reindeer-icon.png',
+	      className: 'deer-image',
+	      style: { width: '60px', height: '60px' }
 	    }),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'countdown-text' },
 	      dayCount,
-	      ' until Christmas!'
-	    ),
-	    _react2.default.createElement('img', {
-	      src: '../images/reindeer-icon.png',
-	      className: 'deer-image',
-	      style: { width: '60px', height: '60px' }
-	    })
+	      ' until Christmas'
+	    )
 	  );
 	};
 	
