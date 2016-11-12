@@ -22221,11 +22221,9 @@
 	      var that = this;
 	      _firebase2.default.auth().onAuthStateChanged(function (user) {
 	        if (user) {
-	          console.log('!! currentUser', user);
 	          that.setState({ currentUser: user });
 	        } else {
 	          // No user is signed in.
-	          console.log('!!! no currentUser');
 	        }
 	      });
 	    }
@@ -22500,21 +22498,19 @@
 	      var that = this;
 	      firebase.auth().onAuthStateChanged(function (user) {
 	        if (user) {
-	          console.log('!! currentUser', user);
 	
 	          var userId = user.uid;
 	          that._createUserObject(userId);
 	          that.setState({ currentUser: user });
 	        } else {
 	          // No user is signed in.
-	          console.log('!!! no currentUser');
+	
 	        }
 	      }).then(function () {
-	        console.log('email, currentUser in auth-signup', that.state.email, that.state.currentUser);
 	
 	        that._createUserObject(that.state.currentUser.uid);
 	      }).catch(function (error) {
-	        console.log('auth-signup error!', error);
+	        console.log('error!', error);
 	      });
 	    }
 	  }, {
@@ -22522,7 +22518,6 @@
 	    value: function _createUserObject(userId) {
 	      var email = this.state.email;
 	
-	      console.log('_createUserObject called', userId, email);
 	      firebase.database().ref('people/' + userId).set({
 	        email: email,
 	        hasCompletedSignup: false,
@@ -22540,14 +22535,9 @@
 	          password = _state.password;
 	
 	
-	      console.log('begun');
-	
-	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-	        console.log('submit clicked!', user);
-	      }).catch(function (error) {
+	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {}).catch(function (error) {
 	        var errorCode = error.code;
 	        var errorMessage = error.message;
-	        console.log('createUser auth error!', errorCode, errorMessage);
 	      });
 	
 	      this.checkCurrentUser();
@@ -22819,15 +22809,6 @@
 	  _createClass(Content, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      var that = this;
-	
-	      // NOTE test case
-	      // let userObjectRef2 = firebase.database().ref('people/');
-	      // userObjectRef2.on('value', function(snapshot) {
-	      //   let userObject = snapshot.val();
-	      //   console.log('users!', userObject);
-	      // });
-	
 	      this.checkHasUserCompletedSignup();
 	    }
 	  }, {
@@ -22865,11 +22846,7 @@
 	      var userObject = this.state.userObject;
 	
 	
-	      console.log('userObject from content', userObject);
-	
 	      var isSignupCompleted = userObject.hasCompletedSignup;
-	
-	      console.log('hasCompletedSignup?', isSignupCompleted);
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -22964,8 +22941,6 @@
 	    value: function _updateUserObject(name, wishListUrl, customMessage) {
 	      var user = firebase.auth().currentUser;
 	      var userId = user.uid;
-	
-	      console.log('userId in info-query', user.uid);
 	
 	      firebase.database().ref('people/' + userId).set({
 	        name: name,

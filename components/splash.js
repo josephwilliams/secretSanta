@@ -21,11 +21,9 @@ export default class Splash extends Component {
     let that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('!! currentUser', user);
         that.setState({ currentUser: user });
       } else {
         // No user is signed in.
-        console.log('!!! no currentUser');
       }
     });
   }

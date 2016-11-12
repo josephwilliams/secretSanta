@@ -25,29 +25,26 @@ export default class Auth extends Component {
     let that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('!! currentUser', user);
 
         const userId = user.uid;
         that._createUserObject(userId);
         that.setState({ currentUser: user });
       } else {
         // No user is signed in.
-        console.log('!!! no currentUser');
+
       }
     })
     .then(() => {
-      console.log('email, currentUser in auth-signup', that.state.email, that.state.currentUser);
 
       that._createUserObject(that.state.currentUser.uid);
     })
     .catch((error) => {
-      console.log('auth-signup error!', error);
+      console.log('error!', error);
     });
   }
 
   _createUserObject(userId) {
     const { email } = this.state;
-    console.log('_createUserObject called', userId, email);
     firebase.database().ref('people/' + userId).set({
       email: email,
       hasCompletedSignup: false,
@@ -61,16 +58,12 @@ export default class Auth extends Component {
   _onSubmit() {
     const { email, password } = this.state;
 
-    console.log('begun');
-
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      console.log('submit clicked!', user);
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log('createUser auth error!', errorCode, errorMessage);
     });
 
     this.checkCurrentUser();

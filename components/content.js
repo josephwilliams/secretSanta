@@ -17,15 +17,6 @@ export default class Content extends Component {
   }
 
   componentWillMount() {
-    let that = this;
-
-    // NOTE test case
-    // let userObjectRef2 = firebase.database().ref('people/');
-    // userObjectRef2.on('value', function(snapshot) {
-    //   let userObject = snapshot.val();
-    //   console.log('users!', userObject);
-    // });
-
     this.checkHasUserCompletedSignup();
   }
 
@@ -57,11 +48,7 @@ export default class Content extends Component {
     const { signOut, currentUser } = this.props;
     const { userObject } = this.state;
 
-    console.log('userObject from content', userObject);
-
     let isSignupCompleted = userObject.hasCompletedSignup;
-
-    console.log('hasCompletedSignup?', isSignupCompleted);
 
     return (
       <div className={'splash-row'}>

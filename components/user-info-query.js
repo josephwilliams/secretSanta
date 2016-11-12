@@ -30,8 +30,6 @@ export default class BasicInfoQuery extends Component {
     let user = firebase.auth().currentUser;
     let userId = user.uid;
 
-    console.log('userId in info-query', user.uid);
-
     firebase.database().ref('people/' + userId).set({
       name: name,
       wishListUrl: wishListUrl,
