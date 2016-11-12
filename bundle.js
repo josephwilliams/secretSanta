@@ -22230,6 +22230,17 @@
 	      });
 	    }
 	  }, {
+	    key: '_signOut',
+	    value: function _signOut() {
+	      var that = this;
+	      _firebase2.default.auth().signOut().then(function () {
+	        that.setState({ currentUser: null });
+	      }, function (error) {
+	        // An error happened.
+	        console.log('!!! signout error', error);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var currentUser = this.state.currentUser;
@@ -22246,7 +22257,7 @@
 	          _react2.default.createElement('img', { src: '../images/flat_elf.jpg', className: 'splash-image' }),
 	          !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	          !!currentUser && _react2.default.createElement(_content2.default, null),
-	          !!currentUser && _react2.default.createElement(_signout2.default, null)
+	          !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
 	        ),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
 	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '50px 10px' } })
@@ -22435,12 +22446,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _firebase = __webpack_require__(172);
-	
-	var firebase = _interopRequireWildcard(_firebase);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -22451,11 +22456,12 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import * as firebase from 'firebase';
 	// import FirebaseApp from '../root';
 	
-	// var firebase = require('firebase/app');
-	// require('firebase/auth');
-	// require('firebase/database');
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
 	
 	var Auth = function (_Component) {
 	  _inherits(Auth, _Component);
@@ -22489,11 +22495,23 @@
 	      firebase.auth().onAuthStateChanged(function (user) {
 	        if (user) {
 	          console.log('!! currentUser', user);
+	
+	          var userId = user.uid;
+	          that._createUserObject(userId);
 	          that.setState({ currentUser: user });
 	        } else {
 	          // No user is signed in.
 	          console.log('!!! no currentUser');
 	        }
+	      });
+	    }
+	  }, {
+	    key: '_createUserObject',
+	    value: function _createUserObject(userId, email) {
+	      firebase.database().ref('users/' + userId).set({
+	        email: email,
+	        hasCompletedSignup: false,
+	        userId: userId
 	      });
 	    }
 	  }, {
@@ -22505,6 +22523,8 @@
 	          email = _state.email,
 	          password = _state.password;
 	
+	
+	      console.log('begun');
 	
 	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
 	        console.log('submit clicked!');
@@ -22520,8 +22540,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'signup-wrapper' },
@@ -22548,9 +22566,7 @@
 	          type: 'submit',
 	          value: 'Sign up',
 	          className: 'auth-submit-button',
-	          onSubmit: function onSubmit() {
-	            return _this4._onSubmit;
-	          }
+	          onClick: this._onSubmit.bind(this)
 	        })
 	      );
 	    }
@@ -22614,13 +22630,17 @@
 	    value: function _onChange(field) {
 	      var _this2 = this;
 	
-	      (function () {
-	        _this2.setState(_defineProperty({}, field, event.target.value));
-	      });
+	      return function (event) {
+	        return _this2.setState(_defineProperty({}, field, event.target.value));
+	      };
 	    }
 	  }, {
 	    key: '_onSubmit',
 	    value: function _onSubmit() {
+	      var _state = this.state,
+	          email = _state.email,
+	          password = _state.password;
+	
 	      firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
 	        var errorCode = error.code;
 	        var errorMessage = error.message;
@@ -22630,6 +22650,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this3 = this;
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'signup-wrapper' },
@@ -22656,7 +22678,9 @@
 	          type: 'submit',
 	          value: 'Log in',
 	          className: 'auth-submit-button',
-	          onSubmit: this._onSubmit
+	          onClick: function onClick() {
+	            return _this3._onSubmit();
+	          }
 	        })
 	      );
 	    }
@@ -22741,6 +22765,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _userInfoQuery = __webpack_require__(189);
+	
+	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22749,21 +22777,52 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
 	var Content = function (_Component) {
 	  _inherits(Content, _Component);
 	
-	  function Content() {
+	  function Content(props) {
 	    _classCallCheck(this, Content);
 	
-	    return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
+	
+	    _this.state = {
+	      userObject: null
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Content, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var that = this;
+	      var userObjectRef = firebase.database().ref('users/' + this.props.userId);
+	      userObjectRef.on('value', function (snapshot) {
+	        var userObject = snapshot.val();
+	        console.log('userObject!', userObject);
+	        that.setState({ userObject: userObject });
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var userObject = this.state.userObject;
+	
+	
+	      var userId = null;
+	      var hasCompletedSignup = false;
+	      if (userObject) {
+	        var _userId = userObject.userId;
+	        var _hasCompletedSignup = userObject.hasCompletedSignup;
+	      }
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'content-wrapper' },
+	        !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, { userId: userId }),
 	        'content!'
 	      );
 	    }
@@ -22807,25 +22866,13 @@
 	var SignOutButton = function (_Component) {
 	  _inherits(SignOutButton, _Component);
 	
-	  function SignOutButton() {
+	  function SignOutButton(props) {
 	    _classCallCheck(this, SignOutButton);
 	
-	    return _possibleConstructorReturn(this, (SignOutButton.__proto__ || Object.getPrototypeOf(SignOutButton)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (SignOutButton.__proto__ || Object.getPrototypeOf(SignOutButton)).call(this));
 	  }
 	
 	  _createClass(SignOutButton, [{
-	    key: '_signOut',
-	    value: function _signOut() {
-	      firebase.auth().signOut().then(function () {
-	        // Sign-out successful.
-	      }, function (error) {
-	        // An error happened.
-	        console.log('!!! signout error', error);
-	      });
-	
-	      forceUpdate();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -22833,7 +22880,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'signout-button', onClick: function onClick() {
-	            return _this2._signOut();
+	            return _this2.props.signOut();
 	          } },
 	        'Sign out'
 	      );
@@ -24294,6 +24341,117 @@
 	};
 	
 	exports.default = WelcomeText;
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _firebase = __webpack_require__(172);
+	
+	var _firebase2 = _interopRequireDefault(_firebase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var BasicInfoQuery = function (_Component) {
+	  _inherits(BasicInfoQuery, _Component);
+	
+	  function BasicInfoQuery() {
+	    _classCallCheck(this, BasicInfoQuery);
+	
+	    var _this = _possibleConstructorReturn(this, (BasicInfoQuery.__proto__ || Object.getPrototypeOf(BasicInfoQuery)).call(this));
+	
+	    _this.state = {
+	      name: '',
+	      wishListUrl: '',
+	      customMessage: '',
+	      errorMessage: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(BasicInfoQuery, [{
+	    key: '_onChange',
+	    value: function _onChange(field) {
+	      var _this2 = this;
+	
+	      return function (event) {
+	        return _this2.setState(_defineProperty({}, field, event.target.value));
+	      };
+	    }
+	  }, {
+	    key: '_onSubmit',
+	    value: function _onSubmit() {
+	      _firebase2.default.auth().firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+	        var errorCode = error.code;
+	        var errorMessage = error.message;
+	        console.log('auth error!', errorCode, errorMessage);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'auth-wrapper' },
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          placeholder: 'your first name',
+	          onChange: this._onChange('name'),
+	          className: 'input'
+	        }),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          placeholder: 'your Amazon wishlist URL',
+	          onChange: this._onChange('wishListUrl'),
+	          className: 'input'
+	        }),
+	        _react2.default.createElement('textarea', {
+	          type: 'text',
+	          placeholder: 'anything you want to add? :)',
+	          onChange: this._onChange('customMessage'),
+	          className: 'textarea'
+	        }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'auth-error-message' },
+	          this.state.errorMessage
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: 'auth-submit-button',
+	            onClick: this._onSubmit
+	          },
+	          'submit'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return BasicInfoQuery;
+	}(_react.Component);
+	
+	exports.default = BasicInfoQuery;
 
 /***/ }
 /******/ ]);

@@ -9,13 +9,11 @@ export default class BasicInfoQuery extends Component {
       wishListUrl: '',
       customMessage: '',
       errorMessage: '',
-    }
+    };
   }
 
-  _onChange = (field) => {
-    this.setState({
-      [field]: event.target.value,
-    });
+  _onChange(field) {
+    return event => this.setState({ [field]: event.target.value });
   }
 
   _onSubmit() {

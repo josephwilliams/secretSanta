@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 // import FirebaseApp from '../root';
 
-// var firebase = require('firebase/app');
-// require('firebase/auth');
-// require('firebase/database');
+var firebase = require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
 
 export default class Auth extends Component {
   constructor() {
@@ -25,6 +25,9 @@ export default class Auth extends Component {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log('!! currentUser', user);
+        
+        const userId = user.uid;
+        that._createUserObject(userId);
         that.setState({ currentUser: user });
       } else {
         // No user is signed in.
@@ -33,8 +36,18 @@ export default class Auth extends Component {
     });
   }
 
+  _createUserObject(userId, email) {
+    firebase.database().ref('users/' + userId).set({
+      email: email,
+      hasCompletedSignup: false,
+      userId: userId,
+    });
+  }
+
   _onSubmit() {
     const { email, password } = this.state;
+
+    console.log('begun');
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
@@ -74,7 +87,7 @@ export default class Auth extends Component {
           type={'submit'}
           value={'Sign up'}
           className={'auth-submit-button'}
-          onSubmit={()=>this._onSubmit}
+          onClick={this._onSubmit.bind(this)}
         />
       </div>
     );

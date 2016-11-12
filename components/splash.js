@@ -30,6 +30,16 @@ export default class Splash extends Component {
     });
   }
 
+  _signOut() {
+    let that = this;
+    firebase.auth().signOut().then(function() {
+      that.setState({ currentUser: null });
+    }, function(error) {
+      // An error happened.
+      console.log('!!! signout error', error);
+    });
+  }
+
   render() {
     const {
       currentUser,
@@ -48,7 +58,7 @@ export default class Splash extends Component {
           <img src={'../images/flat_elf.jpg'} className={'splash-image'} />
           { !currentUser && <AuthContainer /> }
           { !!currentUser && <MainContent /> }
-          { !!currentUser && <SignOutButton /> }
+          { !!currentUser && <SignOutButton signOut={this._signOut.bind(this)} /> }
         </div>
         { !currentUser &&  <WelcomeText /> }
           <img src={'../images/christmas_village.png'} style={{ borderRadius: '15px', margin: '50px 10px' }} />

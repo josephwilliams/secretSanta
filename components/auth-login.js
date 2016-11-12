@@ -16,14 +16,11 @@ export default class Auth extends Component {
   }
 
   _onChange(field) {
-    () => {
-      this.setState({
-        [field]: event.target.value,
-      });
-    }
+    return event => this.setState({ [field]: event.target.value });
   }
 
   _onSubmit() {
+    const { email, password } = this.state;
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -55,7 +52,7 @@ export default class Auth extends Component {
           type={'submit'}
           value={'Log in'}
           className={'auth-submit-button'}
-          onSubmit={this._onSubmit}
+          onClick={()=>this._onSubmit()}
         />
       </div>
     );
