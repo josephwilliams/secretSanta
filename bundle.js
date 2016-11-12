@@ -22987,7 +22987,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'splash-row', style: { marginTop: '50px' } },
+	          { className: 'splash-row' },
 	          _react2.default.createElement('img', {
 	            src: '../images/santa_blue.jpg',
 	            className: 'splash-image',

@@ -45,7 +45,7 @@ export default class BasicInfoQuery extends Component {
   render() {
     return (
       <div>
-        <div className={'splash-row'} style={{ marginTop: '50px' }}>
+        <div className={'splash-row'}>
           <img
             src={'../images/santa_blue.jpg'}
             className={'splash-image'}

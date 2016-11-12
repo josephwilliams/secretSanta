@@ -28,7 +28,6 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  height: 200px;
 }
 
 .splash-row-text {
@@ -270,6 +269,7 @@ textarea:-ms-input-placeholder {
   position: relative;
   display: flex;
   align-items: flex-end;
+  margin-top: 15px;
 }
 
 .countdown-text {
