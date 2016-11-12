@@ -19,7 +19,7 @@ export default class CoreContent extends Component {
         <div className={'splash-row'}>
           <ContentText />
         </div>
-        <SignOutButton signOut={this._signOut.bind(this)} />
+        <SignOutButton signOut={this.props.signOut} />
       </div>
     );
   }

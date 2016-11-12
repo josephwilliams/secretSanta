@@ -22865,6 +22865,7 @@
 	      console.log('userObject from content', userObject);
 	
 	      var isSignupCompleted = userObject.hasCompletedSignup;
+	      var userObjectGotten = userObject.name;
 	
 	      console.log('hasCompletedSignup?', isSignupCompleted);
 	
@@ -24644,7 +24645,7 @@
 	          { className: 'splash-row' },
 	          _react2.default.createElement(_contentText2.default, null)
 	        ),
-	        _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
+	        _react2.default.createElement(_signout2.default, { signOut: this.props.signOut })
 	      );
 	    }
 	  }]);

@@ -71,6 +71,7 @@ export default class Content extends Component {
     console.log('userObject from content', userObject);
 
     let isSignupCompleted = userObject.hasCompletedSignup;
+    let userObjectGotten = userObject.name;
 
     console.log('hasCompletedSignup?', isSignupCompleted);
 
