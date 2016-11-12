@@ -16,22 +16,22 @@ export default class Content extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     let that = this;
 
     // NOTE test case
-    let userObjectRef2 = firebase.database().ref('users/');
-    userObjectRef2.on('value', function(snapshot) {
-      let userObject = snapshot.val();
-      console.log('users!', userObject);
-    });
+    // let userObjectRef2 = firebase.database().ref('people/');
+    // userObjectRef2.on('value', function(snapshot) {
+    //   let userObject = snapshot.val();
+    //   console.log('users!', userObject);
+    // });
 
     this.checkHasUserCompletedSignup();
   }
 
   _setUserObject(userId) {
     let that = this;
-    let userObjectRef = firebase.database().ref('users/' + userId);
+    let userObjectRef = firebase.database().ref('people/' + userId);
     userObjectRef.on('value', function(snapshot) {
       let userObject = snapshot.val();
       console.log('userObject!', userObject);
@@ -45,7 +45,7 @@ export default class Content extends Component {
     let that = this;
     if ( user ) {
       let userId = user.uid;
-      let userObjectRef = firebase.database().ref('users/' + userId);
+      let userObjectRef = firebase.database().ref('people/' + userId);
       userObjectRef.on('value', function(snapshot) {
         let userObject = snapshot.val();
         that.setState({ userObject: userObject });

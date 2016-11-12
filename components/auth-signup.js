@@ -48,7 +48,7 @@ export default class Auth extends Component {
   _createUserObject(userId) {
     const { email } = this.state;
     console.log('_createUserObject called', userId, email);
-    firebase.database().ref('users/' + userId).set({
+    firebase.database().ref('people/' + userId).set({
       email: email,
       hasCompletedSignup: false,
       userId: userId,

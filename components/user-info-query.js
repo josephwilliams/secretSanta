@@ -32,7 +32,7 @@ export default class BasicInfoQuery extends Component {
 
     console.log('userId in info-query', user.uid);
 
-    firebase.database().ref('users/' + userId).set({
+    firebase.database().ref('people/' + userId).set({
       name: name,
       wishListUrl: wishListUrl,
       customMessage: customMessage,

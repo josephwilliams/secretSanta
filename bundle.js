@@ -22525,7 +22525,7 @@
 	      var email = this.state.email;
 	
 	      console.log('_createUserObject called', userId, email);
-	      firebase.database().ref('users/' + userId).set({
+	      firebase.database().ref('people/' + userId).set({
 	        email: email,
 	        hasCompletedSignup: false,
 	        userId: userId,
@@ -22819,16 +22819,16 @@
 	  }
 	
 	  _createClass(Content, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      var that = this;
 	
 	      // NOTE test case
-	      var userObjectRef2 = firebase.database().ref('users/');
-	      userObjectRef2.on('value', function (snapshot) {
-	        var userObject = snapshot.val();
-	        console.log('users!', userObject);
-	      });
+	      // let userObjectRef2 = firebase.database().ref('people/');
+	      // userObjectRef2.on('value', function(snapshot) {
+	      //   let userObject = snapshot.val();
+	      //   console.log('users!', userObject);
+	      // });
 	
 	      this.checkHasUserCompletedSignup();
 	    }
@@ -22836,7 +22836,7 @@
 	    key: '_setUserObject',
 	    value: function _setUserObject(userId) {
 	      var that = this;
-	      var userObjectRef = firebase.database().ref('users/' + userId);
+	      var userObjectRef = firebase.database().ref('people/' + userId);
 	      userObjectRef.on('value', function (snapshot) {
 	        var userObject = snapshot.val();
 	        console.log('userObject!', userObject);
@@ -22851,7 +22851,7 @@
 	      var that = this;
 	      if (user) {
 	        var userId = user.uid;
-	        var userObjectRef = firebase.database().ref('users/' + userId);
+	        var userObjectRef = firebase.database().ref('people/' + userId);
 	        userObjectRef.on('value', function (snapshot) {
 	          var userObject = snapshot.val();
 	          that.setState({ userObject: userObject });
@@ -22969,7 +22969,7 @@
 	
 	      console.log('userId in info-query', user.uid);
 	
-	      firebase.database().ref('users/' + userId).set({
+	      firebase.database().ref('people/' + userId).set({
 	        name: name,
 	        wishListUrl: wishListUrl,
 	        customMessage: customMessage,
