@@ -22986,7 +22986,7 @@
 	          'div',
 	          { className: 'splash-row' },
 	          _react2.default.createElement('img', {
-	            src: '../images/santa_blue.jpg',
+	            src: './images/santa_blue.jpg',
 	            className: 'splash-image',
 	            style: { height: '162px', width: '180px' }
 	          }),
@@ -23165,7 +23165,7 @@
 	    'div',
 	    { className: 'countdown-wrapper' },
 	    _react2.default.createElement('img', {
-	      src: '../images/reindeer-icon.png',
+	      src: './images/reindeer-icon.png',
 	      className: 'deer-image',
 	      style: { width: '60px', height: '60px' }
 	    }),

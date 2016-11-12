@@ -47,7 +47,7 @@ export default class BasicInfoQuery extends Component {
       <div>
         <div className={'splash-row'}>
           <img
-            src={'../images/santa_blue.jpg'}
+            src={'./images/santa_blue.jpg'}
             className={'splash-image'}
             style={{ height: '162px', width: '180px' }}
           ></img>
