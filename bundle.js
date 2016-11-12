@@ -22844,6 +22844,19 @@
 	      }
 	    }
 	  }, {
+	    key: '_signOut',
+	    value: function _signOut() {
+	      var that = this;
+	      firebase.auth().signOut().then(function () {
+	        that.setState({ userObject: {} });
+	      }, function (error) {
+	        // An error happened.
+	        console.log('!!! signout error', error);
+	      });
+	
+	      this.forceUpdate();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var userObject = this.state.userObject;
@@ -22862,7 +22875,7 @@
 	          'div',
 	          { className: 'content-wrapper' },
 	          !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
-	          isSignupCompleted && _react2.default.createElement(_coreContent2.default, null)
+	          isSignupCompleted && _react2.default.createElement(_coreContent2.default, { signOut: this._signOut.bind(this), currentUser: userObject })
 	        )
 	      );
 	    }
@@ -24592,9 +24605,9 @@
 	
 	var _contentText2 = _interopRequireDefault(_contentText);
 	
-	var _signoutButton = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./signout-button\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _signout = __webpack_require__(187);
 	
-	var _signoutButton2 = _interopRequireDefault(_signoutButton);
+	var _signout2 = _interopRequireDefault(_signout);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24614,31 +24627,24 @@
 	  function CoreContent(props) {
 	    _classCallCheck(this, CoreContent);
 	
-	    var _this = _possibleConstructorReturn(this, (CoreContent.__proto__ || Object.getPrototypeOf(CoreContent)).call(this));
+	    var _this = _possibleConstructorReturn(this, (CoreContent.__proto__ || Object.getPrototypeOf(CoreContent)).call(this, props));
 	
 	    _this.state = {};
 	    return _this;
 	  }
 	
 	  _createClass(CoreContent, [{
-	    key: '_signOut',
-	    value: function _signOut() {
-	      var that = this;
-	      firebase.auth().signOut().then(function () {
-	        that.setState({ currentUser: null });
-	      }, function (error) {
-	        // An error happened.
-	        console.log('!!! signout error', error);
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'splash-row' },
-	        _react2.default.createElement(_contentText2.default, null),
-	        _react2.default.createElement(_signoutButton2.default, { signOut: this._signOut.bind(this) })
+	        { className: 'core-content-wrapper' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splash-row' },
+	          _react2.default.createElement(_contentText2.default, null)
+	        ),
+	        _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
 	      );
 	    }
 	  }]);

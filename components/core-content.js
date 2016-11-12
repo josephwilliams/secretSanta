@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ContentText from './content-text';
-import SignOutButton from './signout-button';
+import SignOutButton from './signout';
 
 var firebase = require('firebase/app');
 require('firebase/auth');
@@ -9,24 +9,16 @@ require('firebase/database');
 
 export default class CoreContent extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {};
-  }
-
-  _signOut() {
-    let that = this;
-    firebase.auth().signOut().then(function() {
-      that.setState({ currentUser: null });
-    }, function(error) {
-      // An error happened.
-      console.log('!!! signout error', error);
-    });
   }
 
   render() {
     return (
-      <div className={'splash-row'}>
-        <ContentText />
+      <div className={'core-content-wrapper'}>
+        <div className={'splash-row'}>
+          <ContentText />
+        </div>
         <SignOutButton signOut={this._signOut.bind(this)} />
       </div>
     );

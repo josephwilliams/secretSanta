@@ -216,17 +216,19 @@ textarea:-ms-input-placeholder {
   height: 50px;
   width: 100px;
   border-radius: 3px;
-  border: 1px solid darkgreen;
-  background: lightgreen;
+  border: 1px solid lightgreen;
+  color: white;
+  background: transparent;
   cursor: pointer;
+  margin: 20px;
 }
 
 .signout-button:hover {
-  background: #a4f5a4;
+  background: rgba(164, 245, 164, 0.13);
 }
 
 .signout-button:active {
-  background: #5ad05a;
+  background: rgba(164, 245, 164, 0.47);
 }
 
 .auth-tabs-wrapper {
@@ -270,4 +272,11 @@ textarea:-ms-input-placeholder {
 
 .countdown-text {
   color: white;
+}
+
+.core-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
