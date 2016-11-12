@@ -48,7 +48,7 @@ export default class AuthContainer extends Component {
 
     return (
       <div className={'splash-row'}>
-        <img src={'../images/flat_elf.jpg'} className={'splash-image'} />
+        <img src={'../images/flat_elf.jpg'} className={'splash-image'}></img>
         <div className={'auth-container'}>
           { this.renderTabs() }
           { isSignUpTab && <AuthSignUp /> }

@@ -50,7 +50,7 @@ export default class BasicInfoQuery extends Component {
             src={'../images/santa_blue.jpg'}
             className={'splash-image'}
             style={{ height: '162px', width: '180px' }}
-          />
+          ></img>
           <div className={'query-wrapper'}>
             <input
               type={'text'}
