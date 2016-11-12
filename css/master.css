@@ -1,5 +1,6 @@
 body {
-  background-color: #5885ad;
+  background-color: #2d313c;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .splash {
@@ -12,16 +13,22 @@ body {
   flex-direction: column;
 }
 
-.splash-top {
+.splash-image {
+  border-radius: 10px;
+  margin: 10px;
+  height: 191px;
+  width: 210px;
+}
+
+.splash-row {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   height: 200px;
 }
 
-.splash-bottom {
+.splash-row-text {
   display: flex;
-  justify-content: center;
-  height: 200px;
+  justify-content: flex-start;
 }
 
 .splash-quadrant {
@@ -31,11 +38,31 @@ body {
   height: 200px;
 }
 
+.text-wrapper {
+  color: #dedede;
+}
+
+.text-wrapper h2 {
+  font-family: 'Mountains of Christmas', cursive;
+  font-weight: lighter;
+  margin: 10px 0 0 0;
+}
+
+.text-wrapper p {
+  margin: 0 auto;
+  font-size: 13px;
+  font-weight: 300;
+  color: #bdbdbd;
+}
+
 .signup-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: #984444;
+  padding: 0px 10px 11px 10px;
+  border-radius: 10px;
 }
 
 .userlist-wrapper {
@@ -46,14 +73,25 @@ body {
 }
 
 .input {
-  height: 50px;
+  height: 37px;
   width: 191px;
-  border: 1px solid lightgrey;
-  background: white;
+  background: transparent;
   margin-top: 10px;
   padding: 5px 0px 0px 10px;
   border-radius: 8px;
-  border: solid 1px #265665;
+  border-bottom: 4px solid #ffffff;
+  color: white;
+}
+
+input {
+  height: 37px;
+  width: 191px;
+  background: transparent;
+  margin-top: 10px;
+  padding: 5px 0px 0px 10px;
+  border-radius: 8px;
+  border-bottom: 4px solid #ffffff;
+  color: white;
 }
 
 .textarea {
@@ -65,7 +103,7 @@ body {
 }
 
 .auth-submit-button {
-  height: 50px;
+  height: 40px;
   width: 202px;
   border-radius: 8px;
   border: 1px solid #8282bf;
@@ -93,20 +131,32 @@ body {
 .auth-tabs-wrapper {
   display: flex;
   margin: auto 0;
+  position: relative;
+  left: 10px;
 }
 
 .auth-tab-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 25px;
+  background: #984444;
+  border-radius: 6px 6px 0 0;
+  color: white;
   cursor: default;
-  width: 50px;
-  height: 20px;
-  background: #83a9cb;
 }
 
 .auth-tab-inactive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 25px;
+  background: rgba(150, 70, 70, 0.57);
+  border-radius: 6px 6px 0 0;
+  color: white;
   cursor: pointer;
-  width: 50px;
-  height: 20px;
-  background: lightblue;
 }
 
 .countdown-wrapper {

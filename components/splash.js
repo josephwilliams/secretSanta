@@ -6,6 +6,7 @@ import UserList from './userlist';
 import MainContent from './content';
 import SignOutButton from './signout';
 import Countdown from './countdown';
+import WelcomeText from './welcome-text';
 
 export default class Splash extends Component {
   constructor() {
@@ -43,19 +44,14 @@ export default class Splash extends Component {
 
     return (
       <div className={'splash'}>
-        <div className={'splash-top'}>
+        <div className={'splash-row'}>
+          <img src={'../images/flat_elf.jpg'} className={'splash-image'} />
           { !currentUser && <AuthContainer /> }
           { !!currentUser && <MainContent /> }
-          <div style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' }} />
-        </div>
-        <div className={'splash-bottom'}>
-          <div style={{ width: '200px', height: 'auto', borderRadius: '15px', margin: '10px', border: '1px solid black' }} />
-          <div className={'splash-quadrant'}>
-            <Countdown />
-            <UserList users={users} />
-          </div>
-        </div>
           { !!currentUser && <SignOutButton /> }
+        </div>
+        { !currentUser &&  <WelcomeText /> }
+          <img src={'../images/christmas_village.png'} style={{ borderRadius: '15px', margin: '50px 10px' }} />
       </div>
     );
   }
