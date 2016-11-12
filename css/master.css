@@ -3,6 +3,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+* {
+  transition: background 0.1s ease-in-out;
+}
+
 .splash {
   padding-top: 200px;
   margin: 0 auto;

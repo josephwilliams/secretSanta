@@ -22180,15 +22180,15 @@
 	
 	var _content2 = _interopRequireDefault(_content);
 	
-	var _signout = __webpack_require__(185);
+	var _signout = __webpack_require__(187);
 	
 	var _signout2 = _interopRequireDefault(_signout);
 	
-	var _countdown = __webpack_require__(186);
+	var _countdown = __webpack_require__(188);
 	
 	var _countdown2 = _interopRequireDefault(_countdown);
 	
-	var _welcomeText = __webpack_require__(188);
+	var _welcomeText = __webpack_require__(190);
 	
 	var _welcomeText2 = _interopRequireDefault(_welcomeText);
 	
@@ -22292,6 +22292,10 @@
 	var _authLogin = __webpack_require__(182);
 	
 	var _authLogin2 = _interopRequireDefault(_authLogin);
+	
+	var _countdown = __webpack_require__(188);
+	
+	var _countdown2 = _interopRequireDefault(_countdown);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22497,28 +22501,27 @@
 	        if (user) {
 	          console.log('!! currentUser', user);
 	
-	          var _userId = user.uid;
-	          that._createUserObject(_userId);
+	          var userId = user.uid;
+	          that._createUserObject(userId);
 	          that.setState({ currentUser: user });
 	        } else {
 	          // No user is signed in.
 	          console.log('!!! no currentUser');
 	        }
+	      }).then(function () {
+	        console.log('email, currentUser in auth-signup', that.state.email, that.state.currentUser);
+	
+	        that._createUserObject(that.state.currentUser.uid);
+	      }).catch(function (error) {
+	        console.log('auth-signup error!', error);
 	      });
-	
-	      var _state = this.state,
-	          email = _state.email,
-	          currentUser = _state.currentUser;
-	
-	      var userId = currentUser.uid;
-	
-	      console.log('email, currentUser in auth-signup', email, currentUser);
-	
-	      this._createUserObject(userId, email);
 	    }
 	  }, {
 	    key: '_createUserObject',
-	    value: function _createUserObject(userId, email) {
+	    value: function _createUserObject(userId) {
+	      var email = this.state.email;
+	
+	      console.log('_createUserObject called', userId, email);
 	      firebase.database().ref('users/' + userId).set({
 	        email: email,
 	        hasCompletedSignup: false,
@@ -22528,24 +22531,22 @@
 	  }, {
 	    key: '_onSubmit',
 	    value: function _onSubmit() {
-	      var _this3 = this;
-	
-	      var _state2 = this.state,
-	          email = _state2.email,
-	          password = _state2.password;
+	      var _state = this.state,
+	          email = _state.email,
+	          password = _state.password;
 	
 	
 	      console.log('begun');
 	
-	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-	        console.log('submit clicked!');
-	        _this3.checkCurrentUser();
+	      firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
+	        console.log('submit clicked!', user);
 	      }).catch(function (error) {
 	        var errorCode = error.code;
 	        var errorMessage = error.message;
-	        console.log('auth error!', errorCode, errorMessage);
+	        console.log('createUser auth error!', errorCode, errorMessage);
 	      });
 	
+	      this.checkCurrentUser();
 	      this.forceUpdate();
 	    }
 	  }, {
@@ -22776,7 +22777,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userInfoQuery = __webpack_require__(189);
+	var _userInfoQuery = __webpack_require__(185);
 	
 	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
 	
@@ -22873,6 +22874,190 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _queryText = __webpack_require__(186);
+	
+	var _queryText2 = _interopRequireDefault(_queryText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
+	var BasicInfoQuery = function (_Component) {
+	  _inherits(BasicInfoQuery, _Component);
+	
+	  function BasicInfoQuery() {
+	    _classCallCheck(this, BasicInfoQuery);
+	
+	    var _this = _possibleConstructorReturn(this, (BasicInfoQuery.__proto__ || Object.getPrototypeOf(BasicInfoQuery)).call(this));
+	
+	    _this.state = {
+	      name: '',
+	      wishListUrl: '',
+	      customMessage: '',
+	      errorMessage: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(BasicInfoQuery, [{
+	    key: '_onChange',
+	    value: function _onChange(field) {
+	      var _this2 = this;
+	
+	      return function (event) {
+	        return _this2.setState(_defineProperty({}, field, event.target.value));
+	      };
+	    }
+	  }, {
+	    key: '_onSubmit',
+	    value: function _onSubmit() {
+	      var _state = this.state,
+	          name = _state.name,
+	          wishListUrl = _state.wishListUrl,
+	          customMessage = _state.customMessage;
+	
+	      this._updateUserObject(name, wishListUrl, customMessage);
+	    }
+	  }, {
+	    key: '_updateUserObject',
+	    value: function _updateUserObject(name, wishListUrl, customMessage) {
+	      var userId = this.props.userId;
+	
+	
+	      firebase.database().ref('users/' + userId).set({
+	        name: name,
+	        wishListUrl: wishListUrl,
+	        customMessage: customMessage
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splash-row' },
+	          _react2.default.createElement('img', {
+	            src: '../images/santa_blue.jpg',
+	            className: 'splash-image',
+	            style: { height: '162px', width: '180px' }
+	          }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'query-wrapper' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'name',
+	              onChange: this._onChange('name'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'wishlist URL (e.g. Amazon)',
+	              onChange: this._onChange('wishListUrl'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('textarea', {
+	              type: 'text',
+	              placeholder: "anything you'd like to add?",
+	              onChange: this._onChange('customMessage'),
+	              className: 'textarea'
+	            }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'auth-error-message' },
+	              this.state.errorMessage
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                className: 'auth-submit-button',
+	                onClick: this._onSubmit.bind(this)
+	              },
+	              'submit'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(_queryText2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return BasicInfoQuery;
+	}(_react.Component);
+	
+	exports.default = BasicInfoQuery;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var QueryText = function QueryText() {
+	
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'splash-row-text' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'text-wrapper', style: { paddingLeft: '50px' } },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'almost done!'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'Fill in the rest of this for the person that draws your name.'
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = QueryText;
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _firebase = __webpack_require__(172);
 	
 	var firebase = _interopRequireWildcard(_firebase);
@@ -22917,7 +23102,7 @@
 	exports.default = SignOutButton;
 
 /***/ },
-/* 186 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22930,7 +23115,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _countdown = __webpack_require__(187);
+	var _countdown = __webpack_require__(189);
 	
 	var _countdown2 = _interopRequireDefault(_countdown);
 	
@@ -22943,6 +23128,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'countdown-wrapper' },
+	    _react2.default.createElement('img', { src: '../images/santa_transparent.png', className: 'deer-image' }),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'countdown-text' },
@@ -22955,7 +23141,7 @@
 	exports.default = Countdown;
 
 /***/ },
-/* 187 */
+/* 189 */
 /***/ function(module, exports) {
 
 	/*global window */
@@ -24327,7 +24513,7 @@
 
 
 /***/ },
-/* 188 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24365,190 +24551,6 @@
 	};
 	
 	exports.default = WelcomeText;
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _queryText = __webpack_require__(190);
-	
-	var _queryText2 = _interopRequireDefault(_queryText);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var firebase = __webpack_require__(173);
-	__webpack_require__(174);
-	__webpack_require__(175);
-	
-	var BasicInfoQuery = function (_Component) {
-	  _inherits(BasicInfoQuery, _Component);
-	
-	  function BasicInfoQuery() {
-	    _classCallCheck(this, BasicInfoQuery);
-	
-	    var _this = _possibleConstructorReturn(this, (BasicInfoQuery.__proto__ || Object.getPrototypeOf(BasicInfoQuery)).call(this));
-	
-	    _this.state = {
-	      name: '',
-	      wishListUrl: '',
-	      customMessage: '',
-	      errorMessage: ''
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(BasicInfoQuery, [{
-	    key: '_onChange',
-	    value: function _onChange(field) {
-	      var _this2 = this;
-	
-	      return function (event) {
-	        return _this2.setState(_defineProperty({}, field, event.target.value));
-	      };
-	    }
-	  }, {
-	    key: '_onSubmit',
-	    value: function _onSubmit() {
-	      var _state = this.state,
-	          name = _state.name,
-	          wishListUrl = _state.wishListUrl,
-	          customMessage = _state.customMessage;
-	
-	      this._updateUserObject(name, wishListUrl, customMessage);
-	    }
-	  }, {
-	    key: '_updateUserObject',
-	    value: function _updateUserObject(name, wishListUrl, customMessage) {
-	      var userId = this.props.userId;
-	
-	
-	      firebase.database().ref('users/' + userId).set({
-	        name: name,
-	        wishListUrl: wishListUrl,
-	        customMessage: customMessage
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'splash-row' },
-	          _react2.default.createElement('img', {
-	            src: '../images/santa_blue.jpg',
-	            className: 'splash-image',
-	            style: { height: '162px', width: '180px' }
-	          }),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'query-wrapper' },
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'your first name',
-	              onChange: this._onChange('name'),
-	              className: 'input',
-	              style: { borderColor: '#ef4754' }
-	            }),
-	            _react2.default.createElement('input', {
-	              type: 'text',
-	              placeholder: 'your Amazon wishlist URL',
-	              onChange: this._onChange('wishListUrl'),
-	              className: 'input',
-	              style: { borderColor: '#ef4754' }
-	            }),
-	            _react2.default.createElement('textarea', {
-	              type: 'text',
-	              placeholder: 'anything you want to add? :)',
-	              onChange: this._onChange('customMessage'),
-	              className: 'textarea'
-	            }),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'auth-error-message' },
-	              this.state.errorMessage
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              {
-	                className: 'auth-submit-button',
-	                onClick: this._onSubmit.bind(this)
-	              },
-	              'submit'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(_queryText2.default, null)
-	      );
-	    }
-	  }]);
-	
-	  return BasicInfoQuery;
-	}(_react.Component);
-	
-	exports.default = BasicInfoQuery;
-
-/***/ },
-/* 190 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var QueryText = function QueryText() {
-	
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'splash-row-text' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'text-wrapper', style: { paddingLeft: '50px' } },
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'almost done!'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'Fill in the rest of this for the person that draws your name.'
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = QueryText;
 
 /***/ }
 /******/ ]);

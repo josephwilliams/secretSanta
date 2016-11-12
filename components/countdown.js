@@ -9,6 +9,7 @@ const Countdown = () => {
 
   return (
     <div className={'countdown-wrapper'}>
+      <img src={'../images/santa_transparent.png'} className={'deer-image'} />
       <div className={'countdown-text'}>
         { dayCount }
         {' until Christmas!'}

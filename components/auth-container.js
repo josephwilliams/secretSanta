@@ -4,6 +4,7 @@ import classnames from 'classnames';
 
 import AuthSignUp from './auth-signup';
 import AuthLogIn from './auth-login';
+import Countdown from './countdown';
 
 export default class AuthContainer extends Component {
   constructor(){

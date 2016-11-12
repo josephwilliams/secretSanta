@@ -34,17 +34,20 @@ export default class Auth extends Component {
         // No user is signed in.
         console.log('!!! no currentUser');
       }
+    })
+    .then(() => {
+      console.log('email, currentUser in auth-signup', that.state.email, that.state.currentUser);
+
+      that._createUserObject(that.state.currentUser.uid);
+    })
+    .catch((error) => {
+      console.log('auth-signup error!', error);
     });
-
-    const { email, currentUser } = this.state;
-    const userId = currentUser.uid;
-
-    console.log('email, currentUser in auth-signup', email, currentUser);
-
-    this._createUserObject(userId, email);
   }
 
-  _createUserObject(userId, email) {
+  _createUserObject(userId) {
+    const { email } = this.state;
+    console.log('_createUserObject called', userId, email);
     firebase.database().ref('users/' + userId).set({
       email: email,
       hasCompletedSignup: false,
@@ -58,16 +61,16 @@ export default class Auth extends Component {
     console.log('begun');
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('submit clicked!');
-      this.checkCurrentUser();
+    .then((user) => {
+      console.log('submit clicked!', user);
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log('auth error!', errorCode, errorMessage);
+      console.log('createUser auth error!', errorCode, errorMessage);
     });
 
+    this.checkCurrentUser();
     this.forceUpdate();
   }
 

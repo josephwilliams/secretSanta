@@ -48,21 +48,21 @@ export default class BasicInfoQuery extends Component {
           <div className={'query-wrapper'}>
             <input
               type={'text'}
-              placeholder={'your first name'}
+              placeholder={'name'}
               onChange={this._onChange('name')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
             />
             <input
               type={'text'}
-              placeholder={'your Amazon wishlist URL'}
+              placeholder={'wishlist URL (e.g. Amazon)'}
               onChange={this._onChange('wishListUrl')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
             />
             <textarea
               type={'text'}
-              placeholder={'anything you want to add? :)'}
+              placeholder={"anything you'd like to add?"}
               onChange={this._onChange('customMessage')}
               className={'textarea'}
             />
