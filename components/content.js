@@ -53,33 +53,21 @@ export default class Content extends Component {
     }
   }
 
-  _signOut() {
-    let that = this;
-    firebase.auth().signOut().then(function() {
-      that.setState({ userObject: {} });
-    }, function(error) {
-      // An error happened.
-      console.log('!!! signout error', error);
-    });
-
-    // this.forceUpdate();
-  }
-
   render() {
+    const { signOut, currentUser } = this.props;
     const { userObject } = this.state;
 
     console.log('userObject from content', userObject);
 
     let isSignupCompleted = userObject.hasCompletedSignup;
-    let userObjectGotten = userObject.name;
 
     console.log('hasCompletedSignup?', isSignupCompleted);
 
     return (
       <div className={'splash-row'}>
         <div className={'content-wrapper'}>
-          { userObjectGotten && !isSignupCompleted && <UserInfoQuery setUserObject={this._setUserObject.bind(this)}/> }
-          { isSignupCompleted && <CoreContent signOut={this._signOut.bind(this)} currentUser={userObject} /> }
+          { currentUser && !isSignupCompleted && <UserInfoQuery setUserObject={this._setUserObject.bind(this)}/> }
+          { currentUser && isSignupCompleted && <CoreContent signOut={signOut} currentUser={userObject} /> }
         </div>
       </div>
     );

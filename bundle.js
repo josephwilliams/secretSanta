@@ -22230,6 +22230,19 @@
 	      });
 	    }
 	  }, {
+	    key: '_signOut',
+	    value: function _signOut() {
+	      var that = this;
+	      _firebase2.default.auth().signOut().then(function () {
+	        that.setState({ currentUser: null });
+	      }, function (error) {
+	        // An error happened.
+	        console.log('!!! signout error', error);
+	      });
+	
+	      // this.forceUpdate();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var currentUser = this.state.currentUser;
@@ -22237,11 +22250,13 @@
 	
 	      var users = ['user1', 'user2', 'user3'];
 	
+	      console.log('splash currentUser status, true true if yes', currentUser, !!currentUser, currentUser);
+	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash' },
 	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
-	        !!currentUser && _react2.default.createElement(_content2.default, null),
+	        !!currentUser && _react2.default.createElement(_content2.default, { currentUser: currentUser, signOut: this._signOut.bind(this) }),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
 	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } })
 	      );
@@ -22844,28 +22859,17 @@
 	      }
 	    }
 	  }, {
-	    key: '_signOut',
-	    value: function _signOut() {
-	      var that = this;
-	      firebase.auth().signOut().then(function () {
-	        that.setState({ userObject: {} });
-	      }, function (error) {
-	        // An error happened.
-	        console.log('!!! signout error', error);
-	      });
-	
-	      // this.forceUpdate();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _props = this.props,
+	          signOut = _props.signOut,
+	          currentUser = _props.currentUser;
 	      var userObject = this.state.userObject;
 	
 	
 	      console.log('userObject from content', userObject);
 	
 	      var isSignupCompleted = userObject.hasCompletedSignup;
-	      var userObjectGotten = userObject.name;
 	
 	      console.log('hasCompletedSignup?', isSignupCompleted);
 	
@@ -22875,8 +22879,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content-wrapper' },
-	          userObjectGotten && !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
-	          isSignupCompleted && _react2.default.createElement(_coreContent2.default, { signOut: this._signOut.bind(this), currentUser: userObject })
+	          currentUser && !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
+	          currentUser && isSignupCompleted && _react2.default.createElement(_coreContent2.default, { signOut: signOut, currentUser: userObject })
 	        )
 	      );
 	    }
