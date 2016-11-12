@@ -22249,8 +22249,6 @@
 	
 	      var users = ['user1', 'user2', 'user3'];
 	
-	      console.log('splash currentUser status, true true if yes', currentUser, !!currentUser, currentUser);
-	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash' },
@@ -22258,7 +22256,7 @@
 	        !!currentUser && _react2.default.createElement(_content2.default, { currentUser: currentUser, signOut: this._signOut.bind(this) }),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
 	        _react2.default.createElement(_countdown2.default, null),
-	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } })
+	        _react2.default.createElement('img', { src: './images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } })
 	      );
 	    }
 	  }]);
