@@ -22364,7 +22364,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'splash-row' },
-	        _react2.default.createElement('img', { src: '../images/flat_elf.jpg', className: 'splash-image' }),
+	        _react2.default.createElement('img', { src: './images/flat_elf.jpg', className: 'splash-image' }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'auth-container' },
