@@ -212,14 +212,16 @@ textarea:-ms-input-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 100px;
+  height: 35px;
+  width: 80px;
   border-radius: 3px;
   border: 1px solid lightgreen;
   color: white;
   background: transparent;
   cursor: pointer;
   margin: 20px;
+  font-weight: 300;
+  font-size: 13px;
 }
 
 .signout-button:hover {
