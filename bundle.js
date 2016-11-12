@@ -22239,14 +22239,13 @@
 	        // An error happened.
 	        console.log('!!! signout error', error);
 	      });
-	
-	      // this.forceUpdate();
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var currentUser = this.state.currentUser;
 	
+	      // NOTE get users
 	
 	      var users = ['user1', 'user2', 'user3'];
 	

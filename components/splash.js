@@ -38,8 +38,6 @@ export default class Splash extends Component {
       // An error happened.
       console.log('!!! signout error', error);
     });
-
-    // this.forceUpdate();
   }
 
   render() {
@@ -48,6 +46,7 @@ export default class Splash extends Component {
       // users,
     } = this.state;
 
+    // NOTE get users
     const users = [
       'user1',
       'user2',
