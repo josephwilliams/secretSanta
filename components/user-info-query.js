@@ -17,16 +17,23 @@ export default class BasicInfoQuery extends Component {
   }
 
   _onSubmit() {
-    firebase.auth().firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log('auth error!', errorCode, errorMessage);
+    const { name, wishListUrl, customMessage } = this.state;
+    this._updateUserObject(name, wishListUrl, customMessage);
+  }
+
+  _updateUserObject(name, wishListUrl, customMessage) {
+    const { userId } = this.props;
+    
+    firebase.database().ref('users/' + userId).set({
+      name: name,
+      wishListUrl: wishListUrl,
+      customMessage: customMessage,
     });
   }
 
   render() {
     return (
-      <div className={'auth-wrapper'}>
+      <div className={'query-wrapper'}>
         <input
           type={'text'}
           placeholder={'your first name'}
@@ -50,7 +57,7 @@ export default class BasicInfoQuery extends Component {
         </div>
         <div
           className={'auth-submit-button'}
-          onClick={this._onSubmit}
+          onClick={this._onSubmit.bind(this)}
         >
           {'submit'}
         </div>

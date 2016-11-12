@@ -24401,10 +24401,23 @@
 	  }, {
 	    key: '_onSubmit',
 	    value: function _onSubmit() {
-	      _firebase2.default.auth().firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-	        var errorCode = error.code;
-	        var errorMessage = error.message;
-	        console.log('auth error!', errorCode, errorMessage);
+	      var _state = this.state,
+	          name = _state.name,
+	          wishListUrl = _state.wishListUrl,
+	          customMessage = _state.customMessage;
+	
+	      this._updateUserObject(name, wishListUrl, customMessage);
+	    }
+	  }, {
+	    key: '_updateUserObject',
+	    value: function _updateUserObject(name, wishListUrl, customMessage) {
+	      var userId = this.props.userId;
+	
+	
+	      _firebase2.default.database().ref('users/' + userId).set({
+	        name: name,
+	        wishListUrl: wishListUrl,
+	        customMessage: customMessage
 	      });
 	    }
 	  }, {
@@ -24412,7 +24425,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'auth-wrapper' },
+	        { className: 'query-wrapper' },
 	        _react2.default.createElement('input', {
 	          type: 'text',
 	          placeholder: 'your first name',
@@ -24440,7 +24453,7 @@
 	          'div',
 	          {
 	            className: 'auth-submit-button',
-	            onClick: this._onSubmit
+	            onClick: this._onSubmit.bind(this)
 	          },
 	          'submit'
 	        )
