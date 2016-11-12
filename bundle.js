@@ -22784,6 +22784,10 @@
 	
 	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
 	
+	var _coreContent = __webpack_require__(191);
+	
+	var _coreContent2 = _interopRequireDefault(_coreContent);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22805,7 +22809,7 @@
 	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
 	
 	    _this.state = {
-	      userObject: { hasCompletedSignup: false }
+	      userObject: {}
 	    };
 	    return _this;
 	  }
@@ -22852,7 +22856,7 @@
 	          'div',
 	          { className: 'content-wrapper' },
 	          !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
-	          isSignupCompleted && 'content!'
+	          isSignupCompleted && _react2.default.createElement(_coreContent2.default, null)
 	        )
 	      );
 	    }
@@ -24561,6 +24565,106 @@
 	};
 	
 	exports.default = WelcomeText;
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _contentText = __webpack_require__(192);
+	
+	var _contentText2 = _interopRequireDefault(_contentText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
+	var CoreContent = function (_Component) {
+	  _inherits(CoreContent, _Component);
+	
+	  function CoreContent(props) {
+	    _classCallCheck(this, CoreContent);
+	
+	    var _this = _possibleConstructorReturn(this, (CoreContent.__proto__ || Object.getPrototypeOf(CoreContent)).call(this));
+	
+	    _this.state = {};
+	    return _this;
+	  }
+	
+	  _createClass(CoreContent, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'splash-row' },
+	        _react2.default.createElement(_contentText2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return CoreContent;
+	}(_react.Component);
+	
+	exports.default = CoreContent;
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ContentText = function ContentText() {
+	
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'splash-row-text' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'text-wrapper' },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Thanks!'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        "Once everyone has joined a random drawing will occur and you'll be able to see your recipient's info."
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = ContentText;
 
 /***/ }
 /******/ ]);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import UserInfoQuery from './user-info-query';
+import CoreContent from './core-content';
 
 var firebase = require('firebase/app');
 require('firebase/auth');
@@ -10,7 +11,7 @@ export default class Content extends Component {
   constructor(props) {
     super();
     this.state = {
-      userObject: { hasCompletedSignup: false },
+      userObject: {},
     };
   }
 
@@ -48,7 +49,7 @@ export default class Content extends Component {
       <div className={'splash-row'}>
         <div className={'content-wrapper'}>
           { !isSignupCompleted && <UserInfoQuery setUserObject={this._setUserObject.bind(this)}/> }
-          { isSignupCompleted && 'content!'}
+          { isSignupCompleted && <CoreContent /> }
         </div>
       </div>
     );
