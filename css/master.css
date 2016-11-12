@@ -19,7 +19,7 @@ body {
 
 .splash-image {
   border-radius: 10px;
-  margin: 10px;
+  margin: 0 10px;
   height: 191px;
   width: 210px;
 }
@@ -33,7 +33,7 @@ body {
 
 .splash-row-text {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .splash-quadrant {
@@ -51,6 +51,7 @@ body {
   font-family: 'Mountains of Christmas', cursive;
   font-weight: lighter;
   margin: 10px 0 0 0;
+  text-align: center;
 }
 
 .text-wrapper p {
@@ -58,6 +59,8 @@ body {
   font-size: 13px;
   font-weight: 300;
   color: #bdbdbd;
+  width: 200px;
+  text-align: center;
 }
 
 .signup-wrapper {
@@ -216,6 +219,14 @@ textarea:-ms-input-placeholder {
   border: 1px solid darkgreen;
   background: lightgreen;
   cursor: pointer;
+}
+
+.signout-button:hover {
+  background: #a4f5a4;
+}
+
+.signout-button:active {
+  background: #5ad05a;
 }
 
 .auth-tabs-wrapper {

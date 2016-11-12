@@ -22254,7 +22254,7 @@
 	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	        !!currentUser && _react2.default.createElement(_content2.default, null),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
-	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '25px 10px' } }),
+	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } }),
 	        !!currentUser && _react2.default.createElement(_signout2.default, { signOut: this._signOut.bind(this) })
 	      );
 	    }
@@ -22805,7 +22805,7 @@
 	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
 	
 	    _this.state = {
-	      userObject: null
+	      userObject: { hasCompletedSignup: false }
 	    };
 	    return _this;
 	  }
@@ -22814,18 +22814,23 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var that = this;
-	      var userObjectRef = firebase.database().ref('users/' + this.props.userId);
-	      userObjectRef.on('value', function (snapshot) {
-	        var userObject = snapshot.val();
-	        console.log('userObject!', userObject);
-	        that.setState({ userObject: userObject });
-	      });
 	
 	      // NOTE test case
 	      var userObjectRef2 = firebase.database().ref('users/');
 	      userObjectRef2.on('value', function (snapshot) {
 	        var userObject = snapshot.val();
 	        console.log('users!', userObject);
+	      });
+	    }
+	  }, {
+	    key: '_setUserObject',
+	    value: function _setUserObject(userId) {
+	      var that = this;
+	      var userObjectRef = firebase.database().ref('users/' + userId);
+	      userObjectRef.on('value', function (snapshot) {
+	        var userObject = snapshot.val();
+	        console.log('userObject!', userObject);
+	        that.setState({ userObject: userObject });
 	      });
 	    }
 	  }, {
@@ -22836,12 +22841,9 @@
 	
 	      console.log('userObject from content', userObject);
 	
-	      var hasCompletedSignup = false;
-	      if (userObject) {
-	        var _hasCompletedSignup = userObject.hasCompletedSignup;
-	      }
+	      var isSignupCompleted = userObject.hasCompletedSignup;
 	
-	      console.log('hasCompletedSignup?', hasCompletedSignup);
+	      console.log('hasCompletedSignup?', isSignupCompleted);
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -22849,8 +22851,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content-wrapper' },
-	          !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, null),
-	          hasCompletedSignup && 'content!'
+	          !isSignupCompleted && _react2.default.createElement(_userInfoQuery2.default, { setUserObject: this._setUserObject.bind(this) }),
+	          isSignupCompleted && 'content!'
 	        )
 	      );
 	    }
@@ -22946,7 +22948,7 @@
 	        hasCompletedSignup: true
 	      });
 	
-	      this.setState(this.state);
+	      this.props.setUserObject(userId);
 	    }
 	  }, {
 	    key: 'render',

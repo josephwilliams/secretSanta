@@ -39,7 +39,7 @@ export default class BasicInfoQuery extends Component {
       hasCompletedSignup: true,
     });
 
-    this.setState(this.state);
+    this.props.setUserObject(userId);
   }
 
   render() {
