@@ -36,17 +36,17 @@ export default class Content extends Component {
 
     console.log('userObject from content', userObject);
 
-    const userId = null;
     const hasCompletedSignup = false;
     if ( userObject ) {
-      const userId = userObject.userId;
       const hasCompletedSignup = userObject.hasCompletedSignup;
     }
+
+    console.log('hasCompletedSignup?', hasCompletedSignup);
 
     return (
       <div className={'splash-row'}>
         <div className={'content-wrapper'}>
-          { !hasCompletedSignup && <UserInfoQuery userId={userId}/> }
+          { !hasCompletedSignup && <UserInfoQuery /> }
           { hasCompletedSignup && 'content!'}
         </div>
       </div>

@@ -27,13 +27,19 @@ export default class BasicInfoQuery extends Component {
   }
 
   _updateUserObject(name, wishListUrl, customMessage) {
-    const { userId } = this.props;
+    let user = firebase.auth().currentUser;
+    let userId = user.uid;
+
+    console.log('userId in info-query', user.uid);
 
     firebase.database().ref('users/' + userId).set({
       name: name,
       wishListUrl: wishListUrl,
       customMessage: customMessage,
+      hasCompletedSignup: true,
     });
+
+    this.setState(this.state);
   }
 
   render() {

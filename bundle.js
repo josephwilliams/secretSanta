@@ -22525,7 +22525,10 @@
 	      firebase.database().ref('users/' + userId).set({
 	        email: email,
 	        hasCompletedSignup: false,
-	        userId: userId
+	        userId: userId,
+	        name: null,
+	        wishListUrl: null,
+	        customMessage: null
 	      });
 	    }
 	  }, {
@@ -22833,12 +22836,12 @@
 	
 	      console.log('userObject from content', userObject);
 	
-	      var userId = null;
 	      var hasCompletedSignup = false;
 	      if (userObject) {
-	        var _userId = userObject.userId;
 	        var _hasCompletedSignup = userObject.hasCompletedSignup;
 	      }
+	
+	      console.log('hasCompletedSignup?', hasCompletedSignup);
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -22846,7 +22849,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'content-wrapper' },
-	          !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, { userId: userId }),
+	          !hasCompletedSignup && _react2.default.createElement(_userInfoQuery2.default, null),
 	          hasCompletedSignup && 'content!'
 	        )
 	      );
@@ -22931,14 +22934,19 @@
 	  }, {
 	    key: '_updateUserObject',
 	    value: function _updateUserObject(name, wishListUrl, customMessage) {
-	      var userId = this.props.userId;
+	      var user = firebase.auth().currentUser;
+	      var userId = user.uid;
 	
+	      console.log('userId in info-query', user.uid);
 	
 	      firebase.database().ref('users/' + userId).set({
 	        name: name,
 	        wishListUrl: wishListUrl,
-	        customMessage: customMessage
+	        customMessage: customMessage,
+	        hasCompletedSignup: true
 	      });
+	
+	      this.setState(this.state);
 	    }
 	  }, {
 	    key: 'render',

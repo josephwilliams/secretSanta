@@ -52,6 +52,9 @@ export default class Auth extends Component {
       email: email,
       hasCompletedSignup: false,
       userId: userId,
+      name: null,
+      wishListUrl: null,
+      customMessage: null,
     });
   }
 
