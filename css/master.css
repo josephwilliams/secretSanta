@@ -8,7 +8,7 @@ body {
 }
 
 .splash {
-  padding-top: 200px;
+  padding-top: 125px;
   margin: 0 auto;
 
   display: flex;
@@ -267,11 +267,18 @@ textarea:-ms-input-placeholder {
 }
 
 .countdown-wrapper {
-  display: inline-block;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
 .countdown-text {
-  color: white;
+  position: absolute;
+  top: 30px;
+  left: 16px;
+  width: 75px;
+  color: #f3f3f3;
+  font-size: 12px;
 }
 
 .core-content-wrapper {
@@ -279,4 +286,12 @@ textarea:-ms-input-placeholder {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.deer-image {
+  position: relative;
+}
+
+.speech-bubble-image {
+  position: relative;
 }

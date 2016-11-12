@@ -22258,6 +22258,7 @@
 	        !currentUser && _react2.default.createElement(_authContainer2.default, null),
 	        !!currentUser && _react2.default.createElement(_content2.default, { currentUser: currentUser, signOut: this._signOut.bind(this) }),
 	        !currentUser && _react2.default.createElement(_welcomeText2.default, null),
+	        _react2.default.createElement(_countdown2.default, null),
 	        _react2.default.createElement('img', { src: '../images/christmas_village.png', style: { borderRadius: '15px', margin: '5px 10px 20px 0' } })
 	      );
 	    }
@@ -23166,13 +23167,22 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'countdown-wrapper' },
-	    _react2.default.createElement('img', { src: '../images/santa_transparent.png', className: 'deer-image' }),
+	    _react2.default.createElement('img', {
+	      src: '../images/cool_bubble.jpg',
+	      className: 'speech-bubble-image',
+	      style: { width: '100px', height: '100px' }
+	    }),
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'countdown-text' },
 	      dayCount,
 	      ' until Christmas!'
-	    )
+	    ),
+	    _react2.default.createElement('img', {
+	      src: '../images/reindeer-icon.png',
+	      className: 'deer-image',
+	      style: { width: '60px', height: '60px' }
+	    })
 	  );
 	};
 	
