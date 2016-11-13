@@ -33,14 +33,20 @@ export default class UserList extends Component {
 
     return (
       <div className={'userlist-wrapper'}>
-        {users.map((user, index) => {
-          return (
-            <div className={'userlist-item'} key={index}>
-              {user.name}
-            </div>
-          );
-        })
-       }
+        <div className={'userlist-content'}>
+          {users.map((user, index) => {
+            return (
+              <div className={'userlist-item'} key={index}>
+                {user.name}
+              </div>
+            );
+          })
+         }
+        </div>
+        <img
+          src={'./images/christmas_village.png'}
+          style={{ borderRadius: '15px', margin: '5px 10px 20px 0' }}>
+        </img>
       </div>
     );
   }

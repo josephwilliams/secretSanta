@@ -84,10 +84,34 @@ body {
 }
 
 .userlist-wrapper {
-  display: inline;
-  /*justify-content: center;*/
-  /*align-items: center;*/
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userlist-item {
+  background: rgba(255, 255, 255, 0.27);
+  max-width: 66px;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  font-size: 15px;
+  padding: 3px 6px 3px 8px;
+  margin: 5px;
   color: white;
+}
+
+.userlist-content {
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 120px;
+  padding: 30px 50px;
 }
 
 .input {
