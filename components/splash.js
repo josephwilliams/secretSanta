@@ -58,6 +58,7 @@ export default class Splash extends Component {
         { !currentUser &&  <WelcomeText /> }
         <Countdown />
         <img src={'./images/christmas_village.png'} style={{ borderRadius: '15px', margin: '5px 10px 20px 0' }}></img>
+        <UserList />
       </div>
     );
   }

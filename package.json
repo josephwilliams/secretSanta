@@ -18,7 +18,7 @@
     "classnames": "^2.2.5",
     "countdown": "^2.6.0",
     "firebase": "^3.5.2",
-    "lodash": "^4.16.4",
+    "lodash": "^4.16.6",
     "re-base": "^2.2.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
