@@ -14,15 +14,23 @@ export default class UserList extends Component {
   }
 
   componentDidMount() {
+    console.log('begun');
+
     let that = this;
     let usersObjectRef = firebase.database().ref('people/');
     usersObjectRef.on('value', function(snapshot) {
+      console.log('snapshot', snapshot);
+
       let usersObject = snapshot.val();
       let users = [];
+
+      console.log('user object', usersObject);
 
       _.forOwn(usersObject, function(value, key) {
         users.push(value);
       });
+
+      console.log('users', users);
 
       that.setState({ users: users });
     });

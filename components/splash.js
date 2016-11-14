@@ -26,6 +26,24 @@ export default class Splash extends Component {
         // No user is signed in.
       }
     });
+
+    // next
+    let usersObjectRef = firebase.database().ref('people/');
+
+    usersObjectRef.on('value', function(snapshot) {
+      console.log('snapshot', snapshot);
+
+      let usersObject = snapshot.val();
+      let users = [];
+
+      console.log('user object', usersObject);
+
+      _.forOwn(usersObject, function(value, key) {
+        users.push(value);
+      });
+
+      console.log('users', users);
+    });
   }
 
   _signOut() {
@@ -41,7 +59,6 @@ export default class Splash extends Component {
   render() {
     const {
       currentUser,
-      // users,
     } = this.state;
 
     // NOTE get users
