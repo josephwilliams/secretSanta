@@ -31,18 +31,18 @@ export default class Splash extends Component {
     let usersObjectRef = firebase.database().ref('people/');
 
     usersObjectRef.on('value', function(snapshot) {
-      console.log('snapshot', snapshot);
+      // console.log('snapshot', snapshot);
 
       let usersObject = snapshot.val();
       let users = [];
 
-      console.log('user object', usersObject);
+      // console.log('user object', usersObject);
 
       _.forOwn(usersObject, function(value, key) {
         users.push(value);
       });
 
-      console.log('users', users);
+      // console.log('users', users);
     });
   }
 
@@ -60,13 +60,6 @@ export default class Splash extends Component {
     const {
       currentUser,
     } = this.state;
-
-    // NOTE get users
-    const users = [
-      'user1',
-      'user2',
-      'user3',
-    ];
 
     return (
       <div className={'splash'}>

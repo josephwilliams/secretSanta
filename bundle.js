@@ -22231,18 +22231,18 @@
 	      var usersObjectRef = _firebase2.default.database().ref('people/');
 	
 	      usersObjectRef.on('value', function (snapshot) {
-	        console.log('snapshot', snapshot);
+	        // console.log('snapshot', snapshot);
 	
 	        var usersObject = snapshot.val();
 	        var users = [];
 	
-	        console.log('user object', usersObject);
+	        // console.log('user object', usersObject);
 	
 	        _.forOwn(usersObject, function (value, key) {
 	          users.push(value);
 	        });
 	
-	        console.log('users', users);
+	        // console.log('users', users);
 	      });
 	    }
 	  }, {
@@ -22261,9 +22261,6 @@
 	    value: function render() {
 	      var currentUser = this.state.currentUser;
 	
-	      // NOTE get users
-	
-	      var users = ['user1', 'user2', 'user3'];
 	
 	      return _react2.default.createElement(
 	        'div',
