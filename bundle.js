@@ -41604,6 +41604,10 @@
 	
 	var _signout2 = _interopRequireDefault(_signout);
 	
+	var _userInfoQuery = __webpack_require__(195);
+	
+	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41639,6 +41643,12 @@
 	          { className: 'splash-row' },
 	          _react2.default.createElement(_contentText2.default, null)
 	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { style: { color: 'white' } },
+	          'Want to change something?'
+	        ),
+	        _react2.default.createElement(_userInfoQuery2.default, null),
 	        _react2.default.createElement(_signout2.default, { signOut: this.props.signOut })
 	      );
 	    }
@@ -41774,7 +41784,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var WelcomeText = function WelcomeText() {
-	
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'splash-row-text' },
@@ -41816,6 +41825,147 @@
 	};
 	
 	exports.default = WelcomeText;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _queryText = __webpack_require__(190);
+	
+	var _queryText2 = _interopRequireDefault(_queryText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
+	var PostSignupQuery = function (_Component) {
+	  _inherits(PostSignupQuery, _Component);
+	
+	  function PostSignupQuery() {
+	    _classCallCheck(this, PostSignupQuery);
+	
+	    var _this = _possibleConstructorReturn(this, (PostSignupQuery.__proto__ || Object.getPrototypeOf(PostSignupQuery)).call(this));
+	
+	    _this.state = {
+	      name: '',
+	      wishListUrl: '',
+	      customMessage: '',
+	      errorMessage: ''
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(PostSignupQuery, [{
+	    key: '_onChange',
+	    value: function _onChange(field) {
+	      var _this2 = this;
+	
+	      return function (event) {
+	        return _this2.setState(_defineProperty({}, field, event.target.value));
+	      };
+	    }
+	  }, {
+	    key: '_onSubmit',
+	    value: function _onSubmit() {
+	      var _state = this.state,
+	          name = _state.name,
+	          wishListUrl = _state.wishListUrl,
+	          customMessage = _state.customMessage;
+	
+	      this._updateUserObject(name, wishListUrl, customMessage);
+	    }
+	  }, {
+	    key: '_updateUserObject',
+	    value: function _updateUserObject(name, wishListUrl, customMessage) {
+	      var user = firebase.auth().currentUser;
+	      var userId = user.uid;
+	
+	      firebase.database().ref('people/' + userId).set({
+	        name: name,
+	        wishListUrl: wishListUrl,
+	        customMessage: customMessage,
+	        hasCompletedSignup: true
+	      });
+	
+	      this.props.setUserObject(userId);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'splash-row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'query-wrapper' },
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'name',
+	              onChange: this._onChange('name'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('input', {
+	              type: 'text',
+	              placeholder: 'wishlist URL (e.g. Amazon)',
+	              onChange: this._onChange('wishListUrl'),
+	              className: 'input',
+	              style: { borderColor: '#ef4754' }
+	            }),
+	            _react2.default.createElement('textarea', {
+	              type: 'text',
+	              placeholder: "anything you'd like to add?",
+	              onChange: this._onChange('customMessage'),
+	              className: 'textarea'
+	            }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'auth-error-message' },
+	              this.state.errorMessage
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                className: 'auth-submit-button',
+	                onClick: this._onSubmit.bind(this)
+	              },
+	              'submit'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PostSignupQuery;
+	}(_react.Component);
+	
+	exports.default = PostSignupQuery;
 
 /***/ }
 /******/ ]);

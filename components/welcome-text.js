@@ -1,7 +1,6 @@
 import React from 'react';
 
 const WelcomeText = () => {
-
   return (
     <div className={'splash-row-text'}>
       <div className={'text-wrapper'}>
