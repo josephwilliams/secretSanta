@@ -24189,13 +24189,13 @@
 	        var usersObject = snapshot.val();
 	        var users = [];
 	
-	        console.log('user object', usersObject);
+	        // console.log('user object', usersObject);
 	
 	        _lodash2.default.forOwn(usersObject, function (value, key) {
 	          users.push(value);
 	        });
 	
-	        console.log('users', users);
+	        // console.log('users', users);
 	
 	        that.setState({ users: users });
 	      });
@@ -24213,10 +24213,11 @@
 	          'div',
 	          { className: 'userlist-content' },
 	          users.map(function (user, index) {
+	            var firstName = user.name.split(' ')[0];
 	            return _react2.default.createElement(
 	              'div',
 	              { className: 'userlist-item', key: index },
-	              user.name
+	              firstName
 	            );
 	          })
 	        ),

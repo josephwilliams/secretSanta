@@ -24,13 +24,13 @@ export default class UserList extends Component {
       let usersObject = snapshot.val();
       let users = [];
 
-      console.log('user object', usersObject);
+      // console.log('user object', usersObject);
 
       _.forOwn(usersObject, function(value, key) {
         users.push(value);
       });
 
-      console.log('users', users);
+      // console.log('users', users);
 
       that.setState({ users: users });
     });
@@ -43,9 +43,10 @@ export default class UserList extends Component {
       <div className={'userlist-wrapper'}>
         <div className={'userlist-content'}>
           {users.map((user, index) => {
+            const firstName = user.name.split(' ')[0];
             return (
               <div className={'userlist-item'} key={index}>
-                {user.name}
+                {firstName}
               </div>
             );
           })
