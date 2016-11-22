@@ -6,6 +6,10 @@ var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
 
+function showValueOrPlaceholder(value, placeholder) {
+  return value === '' ? placeholder : value;
+}
+
 export default class PostSignupQuery extends Component {
   constructor() {
     super();
@@ -56,28 +60,30 @@ export default class PostSignupQuery extends Component {
   }
 
   render() {
+    let shownName = showValueOrPlaceholder(this.state.name, 'name');
+    let shownUrl = showValueOrPlaceholder(this.state.wishListUrl, 'wishlist URL, e.g. Amazon');
+    let shownMessage = showValueOrPlaceholder(this.state.customMessage, "anything else you'd like to add?");
     return (
       <div>
         <div className={'splash-row'}>
           <div className={'query-wrapper'}>
             <input
               type={'text'}
-              placeholder={this.state.name}
+              placeholder={shownName}
               onChange={this._onChange('name')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
             />
             <input
               type={'text'}
-              placeholder={this.state.wishListUrl}
+              placeholder={shownUrl}
               onChange={this._onChange('wishListUrl')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
             />
             <textarea
               type={'text'}
-              placeholder={"anything you'd like to add?"}
-              value={this.state.customMessage}
+              placeholder={shownMessage}
               onChange={this._onChange('customMessage')}
               className={'textarea'}
             />

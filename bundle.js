@@ -41859,6 +41859,10 @@
 	__webpack_require__(174);
 	__webpack_require__(175);
 	
+	function showValueOrPlaceholder(value, placeholder) {
+	  return value === '' ? placeholder : value;
+	}
+	
 	var PostSignupQuery = function (_Component) {
 	  _inherits(PostSignupQuery, _Component);
 	
@@ -41929,6 +41933,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var shownName = showValueOrPlaceholder(this.state.name, 'name');
+	      var shownUrl = showValueOrPlaceholder(this.state.wishListUrl, 'wishlist URL, e.g. Amazon');
+	      var shownMessage = showValueOrPlaceholder(this.state.customMessage, "anything else you'd like to add?");
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -41940,22 +41947,21 @@
 	            { className: 'query-wrapper' },
 	            _react2.default.createElement('input', {
 	              type: 'text',
-	              placeholder: this.state.name,
+	              placeholder: shownName,
 	              onChange: this._onChange('name'),
 	              className: 'input',
 	              style: { borderColor: '#ef4754' }
 	            }),
 	            _react2.default.createElement('input', {
 	              type: 'text',
-	              placeholder: this.state.wishListUrl,
+	              placeholder: shownUrl,
 	              onChange: this._onChange('wishListUrl'),
 	              className: 'input',
 	              style: { borderColor: '#ef4754' }
 	            }),
 	            _react2.default.createElement('textarea', {
 	              type: 'text',
-	              placeholder: "anything you'd like to add?",
-	              value: this.state.customMessage,
+	              placeholder: shownMessage,
 	              onChange: this._onChange('customMessage'),
 	              className: 'textarea'
 	            }),
