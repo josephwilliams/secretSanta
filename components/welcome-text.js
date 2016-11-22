@@ -10,6 +10,7 @@ const WelcomeText = () => {
         <p>{'Rules:'}</p>
         <p>{'1. One account per person'}</p>
         <p>{'2. The random draw will occur once everyone has signed up'}</p>
+        <p>{"3. There's a $25 limit on gifts!"}</p>
       </div>
     </div>
   );

@@ -41682,6 +41682,15 @@
 	        'p',
 	        null,
 	        "Once everyone has joined a random drawing will occur and you'll be able to see your recipient's info."
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        _react2.default.createElement(
+	          'strong',
+	          null,
+	          '$25 limit on gifts!'
+	        )
 	      )
 	    )
 	  );
@@ -41796,6 +41805,11 @@
 	        'p',
 	        null,
 	        '2. The random draw will occur once everyone has signed up'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        "3. There's a $25 limit on gifts!"
 	      )
 	    )
 	  );
