@@ -7,6 +7,7 @@ const QueryText = () => {
       <div className={'text-wrapper'} style={{ paddingLeft: '50px' }}>
         <h2>{'almost done!'}</h2>
         <p>{'Fill in the rest of this for the person that draws your name.'}</p>
+        <p><strong>{'$25 limit!'}</strong></p>
       </div>
     </div>
   );
