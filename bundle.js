@@ -41337,7 +41337,7 @@
 	      var userObjectRef = firebase.database().ref('people/' + userId);
 	      userObjectRef.on('value', function (snapshot) {
 	        var userObject = snapshot.val();
-	        console.log('userObject!', userObject);
+	        // console.log('userObject!', userObject);
 	        that.setState({ userObject: userObject });
 	      });
 	    }
@@ -41646,15 +41646,15 @@
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          {
-	            style: { color: '#fff', borderBottom: '5px' }
-	          },
-	          'Want to change something?'
+	          null,
+	          '$25 limit on gifts!'
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          null,
-	          '$25 limit on gifts!'
+	          {
+	            style: { color: '#fff', borderBottom: '5px', fontSize: '12px' }
+	          },
+	          'Want to change something?'
 	        ),
 	        _react2.default.createElement(_userInfoQuery2.default, null),
 	        _react2.default.createElement(_signout2.default, { signOut: this.props.signOut })
@@ -41877,6 +41877,22 @@
 	  }
 	
 	  _createClass(PostSignupQuery, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var user = firebase.auth().currentUser;
+	      var userId = user.uid;
+	      var that = this;
+	      var userObjectRef = firebase.database().ref('people/' + userId);
+	      userObjectRef.on('value', function (snapshot) {
+	        var userObject = snapshot.val();
+	        that.setState({
+	          wishListUrl: userObject.wishListUrl,
+	          customMessage: userObject.customMessage,
+	          name: userObject.name
+	        });
+	      });
+	    }
+	  }, {
 	    key: '_onChange',
 	    value: function _onChange(field) {
 	      var _this2 = this;
@@ -41924,14 +41940,14 @@
 	            { className: 'query-wrapper' },
 	            _react2.default.createElement('input', {
 	              type: 'text',
-	              placeholder: 'name',
+	              placeholder: this.state.name,
 	              onChange: this._onChange('name'),
 	              className: 'input',
 	              style: { borderColor: '#ef4754' }
 	            }),
 	            _react2.default.createElement('input', {
 	              type: 'text',
-	              placeholder: 'wishlist URL (e.g. Amazon)',
+	              placeholder: this.state.wishListUrl,
 	              onChange: this._onChange('wishListUrl'),
 	              className: 'input',
 	              style: { borderColor: '#ef4754' }
@@ -41939,6 +41955,7 @@
 	            _react2.default.createElement('textarea', {
 	              type: 'text',
 	              placeholder: "anything you'd like to add?",
+	              value: this.state.customMessage,
 	              onChange: this._onChange('customMessage'),
 	              className: 'textarea'
 	            }),

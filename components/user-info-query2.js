@@ -17,6 +17,21 @@ export default class PostSignupQuery extends Component {
     };
   }
 
+  componentDidMount() {
+    let user = firebase.auth().currentUser;
+    let userId = user.uid;
+    let that = this;
+    let userObjectRef = firebase.database().ref('people/' + userId);
+    userObjectRef.on('value', function(snapshot) {
+      let userObject = snapshot.val();
+      that.setState({
+        wishListUrl: userObject.wishListUrl,
+        customMessage: userObject.customMessage,
+        name: userObject.name,
+      });
+    });
+  }
+
   _onChange(field) {
     return event => this.setState({ [field]: event.target.value });
   }
@@ -47,14 +62,14 @@ export default class PostSignupQuery extends Component {
           <div className={'query-wrapper'}>
             <input
               type={'text'}
-              placeholder={'name'}
+              placeholder={this.state.name}
               onChange={this._onChange('name')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
             />
             <input
               type={'text'}
-              placeholder={'wishlist URL (e.g. Amazon)'}
+              placeholder={this.state.wishListUrl}
               onChange={this._onChange('wishListUrl')}
               className={'input'}
               style={{ borderColor: '#ef4754' }}
@@ -62,6 +77,7 @@ export default class PostSignupQuery extends Component {
             <textarea
               type={'text'}
               placeholder={"anything you'd like to add?"}
+              value={this.state.customMessage}
               onChange={this._onChange('customMessage')}
               className={'textarea'}
             />

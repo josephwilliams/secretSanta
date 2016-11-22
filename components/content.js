@@ -25,7 +25,7 @@ export default class Content extends Component {
     let userObjectRef = firebase.database().ref('people/' + userId);
     userObjectRef.on('value', function(snapshot) {
       let userObject = snapshot.val();
-      console.log('userObject!', userObject);
+      // console.log('userObject!', userObject);
       that.setState({ userObject: userObject });
     });
   }
