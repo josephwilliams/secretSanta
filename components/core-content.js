@@ -20,7 +20,10 @@ export default class CoreContent extends Component {
         <div className={'splash-row'}>
           <ContentText />
         </div>
-        <p style={{ color: 'white' }}>{'Want to change something?'}</p>
+        <p
+          style={{ color: '#fff', borderBottom: '5px' }}
+        >{'Want to change something?'}</p>
+        <p>{'$25 limit on gifts!'}</p>
         <PostSignupQuery />
         <SignOutButton signOut={this.props.signOut} />
       </div>

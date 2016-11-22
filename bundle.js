@@ -41646,8 +41646,15 @@
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          { style: { color: 'white' } },
+	          {
+	            style: { color: '#fff', borderBottom: '5px' }
+	          },
 	          'Want to change something?'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          '$25 limit on gifts!'
 	        ),
 	        _react2.default.createElement(_userInfoQuery2.default, null),
 	        _react2.default.createElement(_signout2.default, { signOut: this.props.signOut })
@@ -41693,15 +41700,6 @@
 	        'p',
 	        null,
 	        "Once everyone has joined a random drawing will occur and you'll be able to see your recipient's info."
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        _react2.default.createElement(
-	          'strong',
-	          null,
-	          '$25 limit on gifts!'
-	        )
 	      )
 	    )
 	  );
