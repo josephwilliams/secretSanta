@@ -22188,7 +22188,7 @@
 	
 	var _countdown2 = _interopRequireDefault(_countdown);
 	
-	var _welcomeText = __webpack_require__(194);
+	var _welcomeText = __webpack_require__(195);
 	
 	var _welcomeText2 = _interopRequireDefault(_welcomeText);
 	
@@ -41602,7 +41602,7 @@
 	
 	var _signout2 = _interopRequireDefault(_signout);
 	
-	var _userInfoQuery = __webpack_require__(195);
+	var _userInfoQuery = __webpack_require__(194);
 	
 	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
 	
@@ -41773,65 +41773,6 @@
 	  value: true
 	});
 	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var WelcomeText = function WelcomeText() {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'splash-row-text' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'text-wrapper' },
-	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'welcome to the Williams family secret santa!'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'sign up or log in to participate.'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'Rules:'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        '1. One account per person'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        '2. The random draw will occur once everyone has signed up'
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        "3. There's a $25 limit on gifts!"
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = WelcomeText;
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -41985,6 +41926,65 @@
 	}(_react.Component);
 	
 	exports.default = PostSignupQuery;
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var WelcomeText = function WelcomeText() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'splash-row-text' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'text-wrapper' },
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'welcome to the Williams family secret santa!'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'sign up or log in to participate.'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'Rules:'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        '1. One account per person'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        '2. The random draw will occur once everyone has signed up'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        "3. There's a $25 limit on gifts!"
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = WelcomeText;
 
 /***/ }
 /******/ ]);
