@@ -22188,7 +22188,7 @@
 	
 	var _countdown2 = _interopRequireDefault(_countdown);
 	
-	var _welcomeText = __webpack_require__(195);
+	var _welcomeText = __webpack_require__(196);
 	
 	var _welcomeText2 = _interopRequireDefault(_welcomeText);
 	
@@ -24176,12 +24176,12 @@
 	  _createClass(UserList, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      console.log('begun');
+	      // console.log('begun');
 	
 	      var that = this;
 	      var usersObjectRef = firebase.database().ref('people/');
 	      usersObjectRef.on('value', function (snapshot) {
-	        console.log('snapshot', snapshot);
+	        // console.log('snapshot', snapshot);
 	
 	        var usersObject = snapshot.val();
 	        var users = [];
@@ -41606,6 +41606,10 @@
 	
 	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
 	
+	var _userPair = __webpack_require__(195);
+	
+	var _userPair2 = _interopRequireDefault(_userPair);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41639,21 +41643,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'splash-row' },
-	          _react2.default.createElement(_contentText2.default, null)
+	          _react2.default.createElement(_userPair2.default, null)
 	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          '$25 limit on gifts!'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          {
-	            style: { color: '#fff', borderBottom: '5px', fontSize: '12px' }
-	          },
-	          'Want to change something?'
-	        ),
-	        _react2.default.createElement(_userInfoQuery2.default, null),
 	        _react2.default.createElement(_signout2.default, { signOut: this.props.signOut })
 	      );
 	    }
@@ -41929,6 +41920,161 @@
 
 /***/ },
 /* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _userInfoQuery = __webpack_require__(189);
+	
+	var _userInfoQuery2 = _interopRequireDefault(_userInfoQuery);
+	
+	var _coreContent = __webpack_require__(191);
+	
+	var _coreContent2 = _interopRequireDefault(_coreContent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var firebase = __webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
+	
+	var Content = function (_Component) {
+	  _inherits(Content, _Component);
+	
+	  function Content(props) {
+	    _classCallCheck(this, Content);
+	
+	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this));
+	
+	    _this.state = {
+	      userObject: {},
+	      otherUserObject: { name: '' }
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Content, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.getUserInfo();
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.getOtherUserInfo();
+	    }
+	  }, {
+	    key: 'getOtherUserInfo',
+	    value: function getOtherUserInfo(userId) {
+	      var otherUserId = this.state.userObject.pairedUser;
+	      var that = this;
+	      var userObjectRef = firebase.database().ref('people/' + otherUserId);
+	      userObjectRef.on('value', function (snapshot) {
+	        var otherUserObject = snapshot.val();
+	        // console.log('!!! other userObject!', otherUserObject);
+	        that.setState({ otherUserObject: otherUserObject });
+	      });
+	    }
+	  }, {
+	    key: 'getUserInfo',
+	    value: function getUserInfo() {
+	      var user = firebase.auth().currentUser;
+	
+	      var that = this;
+	      if (user) {
+	        var userId = user.uid;
+	        var userObjectRef = firebase.database().ref('people/' + userId);
+	        userObjectRef.on('value', function (snapshot) {
+	          var userObject = snapshot.val();
+	          that.setState({ userObject: userObject });
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var otherUserObject = this.state.otherUserObject;
+	
+	
+	      var name = otherUserObject.name;
+	      var customMessage = otherUserObject.customMessage;
+	      var wishList = otherUserObject.wishListUrl;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'splash-row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'content-wrapper' },
+	          _react2.default.createElement('img', {
+	            src: './images/red_hat.png',
+	            style: { borderRadius: '15px', width: '100px', height: '100px' } }),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'label' },
+	            'Secret Santa has begun! You got: '
+	          ),
+	          _react2.default.createElement(
+	            'h2',
+	            { style: { margin: '0' } },
+	            name
+	          ),
+	          !!customMessage && _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'label' },
+	              'message:'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'text' },
+	              customMessage
+	            )
+	          ),
+	          !!wishList && _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'label' },
+	              'wish list URL:'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'text' },
+	              wishList
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Content;
+	}(_react.Component);
+	
+	exports.default = Content;
+
+/***/ },
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -4,6 +4,8 @@ import ContentText from './content-text';
 import SignOutButton from './signout';
 import PostSignupQuery from './user-info-query2';
 
+import UserPair from './userPair';
+
 var firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
@@ -18,13 +20,8 @@ export default class CoreContent extends Component {
     return (
       <div className={'core-content-wrapper'}>
         <div className={'splash-row'}>
-          <ContentText />
+          <UserPair />
         </div>
-        <p>{'$25 limit on gifts!'}</p>
-        <p
-          style={{ color: '#fff', borderBottom: '5px', fontSize: '12px' }}
-          >{'Want to change something?'}</p>
-        <PostSignupQuery />
         <SignOutButton signOut={this.props.signOut} />
       </div>
     );

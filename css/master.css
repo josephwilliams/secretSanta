@@ -119,6 +119,7 @@ p {
   width: 380px;
   height: 120px;
   padding: 30px 50px;
+  text-align: center;
 }
 
 .input {
@@ -323,10 +324,33 @@ textarea:-ms-input-placeholder {
   justify-content: center;
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
 .deer-image {
   position: relative;
 }
 
 .speech-bubble-image {
   position: relative;
+}
+
+.label {
+  margin: 0 auto;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #bdbdbd;
+
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  color: white;
+  font-size: 13px;
 }
